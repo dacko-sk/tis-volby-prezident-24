@@ -4,10 +4,10 @@ import { decodeHTMLEntities, isNumeric } from './helpers';
 import { routes } from './routes';
 
 export const wpCat = {
-    analyses: 925,
-    assets: 926,
-    featured: 928,
-    news: 877,
+    analyses: 934,
+    assets: 935,
+    featured: 934,
+    news: 933,
 };
 
 const proxyHttpImages = (html) => {
