@@ -34,6 +34,9 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.home()} end>
                             {t(labels.home.navTitle)}
                         </Nav.Link>
+                        <Nav.Link as={NavLink} to={routes.candidates()}>
+                            {t(labels.candidates.navTitle)}
+                        </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.online()}>
                             {t(labels.online.navTitle)}
                         </Nav.Link>
@@ -57,6 +60,7 @@ function Header() {
                                     key={lang}
                                     as={NavLink}
                                     to={localizePath(lang)}
+                                    end
                                 >
                                     {lang}
                                 </NavDropdown.Item>

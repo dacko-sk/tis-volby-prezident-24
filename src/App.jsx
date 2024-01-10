@@ -13,6 +13,8 @@ import Layout from './Layout';
 
 import Analyses from './pages/Analyses';
 import Article from './pages/Article';
+import Candidate from './pages/Candidate';
+import Candidates from './pages/Candidates';
 import Home from './pages/Home';
 import Online from './pages/Online';
 import News from './pages/News';
@@ -35,6 +37,12 @@ function App() {
                                 [routes.article(true, lang), Article],
                                 [routes.news(lang), News],
                                 [routes.online(lang), Online],
+                                [routes.candidates(lang), Candidates],
+                                [
+                                    routes.candidate(true, '', lang),
+                                    Candidate,
+                                    [],
+                                ],
                                 [routes.search(true, lang), Search],
                             ].map(([path, Page, subpages]) => (
                                 <Route

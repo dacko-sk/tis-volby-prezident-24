@@ -98,7 +98,7 @@ export const localizePath = (lang, path) => {
 };
 
 export const urlSegment = (segment, lang) => {
-    return localSegments[lang || getCurrentLanguage()][segment] ?? '';
+    return localSegments[lang || getCurrentLanguage()][segment] ?? segment;
 };
 
 export const routes = {
@@ -117,7 +117,7 @@ export const routes = {
         const niceSlug =
             slug === true
                 ? ':slug'
-                : encodeURIComponent(slug).replaceAll(' ', separators.space);
+                : encodeURIComponent(slug.replaceAll(' ', separators.space));
         return (
             languageRoot(lang) +
             (slug
@@ -139,3 +139,5 @@ export const routes = {
               (query === true ? ':query' : encodeURIComponent(query))
             : ''),
 };
+
+export const decodeSlug = (slug) => slug.replaceAll(separators.space, ' ');

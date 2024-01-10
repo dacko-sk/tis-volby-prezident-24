@@ -7,6 +7,7 @@ import { labels, t } from '../helpers/dictionary';
 import { wpCat } from '../helpers/wp';
 
 // import TotalAdsSpending from '../components/ads/TotalAdsSpending';
+import CandidatesGallery from '../components/candidates/CandidatesGallery';
 // import Top10 from '../components/charts/Top10';
 // import Top10Ads from '../components/charts/Top10Ads';
 import DonateButton from '../components/general/DonateButton';
@@ -33,6 +34,8 @@ function Home() {
                 </Col>
                 <Col lg={6}>{/* <TotalSpending /> */}</Col>
             </Row>
+
+            <CandidatesGallery />
 
             <div className="text-center mb-4">
                 <DonateButton long xl />

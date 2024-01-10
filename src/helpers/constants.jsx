@@ -1,3 +1,60 @@
+import { decodeSlug } from './routes';
+
+import dummy from '../../public/img/user_grey.png';
+
+// import all csv files from the accounts folder via webpack
+const candidatesImages = require.context(
+    '../../public/img/candidates',
+    false,
+    /\.jpg$/
+);
+export const candidateImage = (name) => {
+    let found = null;
+    candidatesImages.keys().some((key) => {
+        if (key.endsWith(`${name}.jpg`)) {
+            found = key;
+            return true;
+        }
+        return false;
+    });
+    return found ? candidatesImages(found) : dummy;
+};
+
+export const candidates = {
+    'Peter Pellegrini': {
+        fb: 403027089864701,
+        wp: 939,
+    },
+    'Ivan Korčok': {
+        fb: 1185998661417403,
+        wp: 936,
+    },
+    'Štefan Harabin': {
+        fb: 1680731138870391,
+        wp: 938,
+    },
+    'Ján Kubiš': {
+        fb: 106795542522284,
+        wp: 937,
+    },
+};
+
+export const candidateData = (slug) => {
+    const name = decodeSlug(slug);
+    if (candidates[name] ?? false) {
+        return {
+            ...candidates[name],
+            name,
+            image: candidateImage(name),
+        };
+    }
+    return null;
+};
+
+export const allCandidatesData = Object.keys(candidates).map((candidate) =>
+    candidateData(candidate)
+);
+
 export const colorLightBlue = '#2bace2';
 export const colorLightBlueDs = '#b9c6cc';
 export const colorDarkBlue = '#1b335f';
