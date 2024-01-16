@@ -29,8 +29,10 @@ export const tickLabel = (value) => {
     return value;
 };
 
-export const partyChartLabel = (party, segment) =>
-    [party, 'party', ...(segment ? [segment] : [])].join(separators.newline);
+export const candidateChartLabel = (candidate, segment) =>
+    [candidate, 'candidate', ...(segment ? [segment] : [])].join(
+        separators.newline
+    );
 
 export const shortChartNames = (name) => shortenValue(name, isMobile ? 30 : 60);
 

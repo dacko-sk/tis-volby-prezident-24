@@ -8,8 +8,16 @@ import Footer from './components/structure/Footer';
 import DonateBanner from './components/general/DonateBanner';
 // import DonateModal from './components/general/DonateModal';
 
+import useAccountsData from './hooks/AccountsData';
+
 function Layout() {
     const { pathname } = useLocation();
+    const { loadAccountsData } = useAccountsData();
+
+    // load transparent accounts data on first apge load
+    useEffect(() => {
+        loadAccountsData();
+    }, []);
 
     // send pageview to analytics on route change
     useEffect(() => {

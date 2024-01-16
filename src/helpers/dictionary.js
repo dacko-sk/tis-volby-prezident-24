@@ -21,6 +21,10 @@ export const labels = {
             'Show all transactions',
         ],
         balance: ['Zostatok', 'Balance'],
+        candidateSpending: [
+            'Priebežné výdavky kandidáta',
+            'Candidate spending',
+        ],
         download: ['Stiahnuť ako CSV', 'Download as CSV'],
         expensesAmount: ['Počet výdavkov', 'Number of expenses'],
         incomesAmount: ['Počet príjmov', 'Number of incomes'],
@@ -29,7 +33,6 @@ export const labels = {
             'Prehľad transakcií na transparentnom účte',
             'Transparent Account Transactions',
         ],
-        partySpending: ['Priebežné výdavky strany', 'Party spending'],
         tableCols: {
             [ak.account_name]: ['Názov účtu', 'Account name'],
             [ak.date]: ['Dátum', 'Date'],
@@ -40,10 +43,13 @@ export const labels = {
             [ak.ss]: ['ŠS', 'Specific symbol'],
         },
         totalDisclaimer: [
-            'Súčet výdavkov na všetkých transparentných účtoch politických strán.',
-            'Sum of spendings on accounts of all political parties.',
+            'Súčet výdavkov na transparentných účtoch všetkých kandidátov.',
+            'Sum of spendings on accounts of all candidates.',
         ],
-        totalSpending: ['Celkové výdavky strán', 'Total parties spending'],
+        totalSpending: [
+            'Celkové výdavky kandidátov',
+            'Total candidates spending',
+        ],
     },
     ads: {
         amount: {
@@ -506,10 +512,24 @@ export const labels = {
         overview: ['Prehľad', 'Overview'],
     },
     charts: {
+        disclaimer: [
+            'Grafy obsahujú dáta z transparentných účtov, očistené o vrátené platby.',
+            'Graphs contains data from transparent accounts net of return payments.',
+        ],
+        disclaimerClick: [
+            'Po kliknutí na meno kandidáta sa rozbalia podrobnosti.',
+            'Click the candidate name for details.',
+        ],
         amount: ['Suma', 'Amount'],
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
         sum: ['Spolu', 'Total'],
+        top10: [
+            'Top 10 kampaní podľa výdavkov a príjmov',
+            'Top 10 campaigns by incomes and spendings',
+        ],
+        uniqueDonors: ['Počet unikátnych darcov', 'Number of unique donors'],
+        updated: ['Naposledy aktualizované', 'Last updated on'],
     },
     contact: ['Kontakt', 'Contact'],
     cookies: {

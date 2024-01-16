@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react';
+import { usePapaParse } from 'react-papaparse';
 
-// import { parties } from '../helpers/constants';
 import { contains } from '../helpers/helpers';
 
 // import aggregatedAcounts from '../../public/csv/transparent/final_aggr_no_returns.csv';
@@ -22,17 +22,18 @@ import { contains } from '../helpers/helpers';
 //     return found ? accountsFolder(found) : null;
 // };
 const accountFile = (filename) =>
-    `https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/accounts/${filename}`;
+    `https://raw.githubusercontent.com/matusv/presidential-elections-slovakia-2024/main/accounts/${filename}`;
 
 export const accountsFile =
-    'https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/final_aggr_no_returns.csv';
-export const baseDate = 1669068712;
+    'https://raw.githubusercontent.com/matusv/presidential-elections-slovakia-2024/main/aggregation_no_returns.csv';
+export const baseDate = 1705266940;
 
 export const csvAggregatedKeys = {
     account: 'url',
     name: 'name',
-    incoming: 'incoming',
-    outgoing: 'outgoing',
+    incoming: 'sum_incoming',
+    outgoing: 'sum_outgoing',
+    timestamp: 'timestamp',
 };
 
 export const csvAccountKeys = {
@@ -44,11 +45,6 @@ export const csvAccountKeys = {
     tx_type: 'tx_type',
     vs: 'vs',
     ss: 'ss',
-};
-
-export const types = {
-    regional: 'regional',
-    local: 'local',
 };
 
 export const getFileName = (account) => {
@@ -79,7 +75,10 @@ export const processAccountsData = (data) => {
         const pd = data;
         let lastUpdate = baseDate;
         pd.data.forEach((row, index) => {
-            lastUpdate = Math.max(lastUpdate, row.timestamp ?? 0);
+            lastUpdate = Math.max(
+                lastUpdate,
+                row[csvAggregatedKeys.timestamp] ?? 0
+            );
 
             // trim certain columns
             [csvAggregatedKeys.account, csvAggregatedKeys.name].forEach(
@@ -110,25 +109,8 @@ export const processAccountsData = (data) => {
             pd.data[index].num_incoming = row.num_incoming ?? 0;
             pd.data[index].num_outgoing = row.num_outgoing ?? 0;
             pd.data[index].num_unique_donors = row.num_unique_donors ?? 0;
-
-            // copy full name & slug from account key as default
-            pd.data[index] = {
-                ...pd.data[index],
-                fbName: pd.data[index][csvAggregatedKeys.name],
-                fullName: pd.data[index][csvAggregatedKeys.name],
-                slug: pd.data[index][csvAggregatedKeys.name],
-                share: 0,
-            };
-
-            // merge data with party config
-            // if (parties[pd.data[index][csvAggregatedKeys.name]] ?? false) {
-            //     pd.data[index] = {
-            //         ...pd.data[index],
-            //         // overwrite with config
-            //         ...parties[pd.data[index][csvAggregatedKeys.name]],
-            //     };
-            // }
         });
+
         return {
             ...pd,
             lastUpdate,
@@ -137,18 +119,11 @@ export const processAccountsData = (data) => {
     return data;
 };
 
-export const findByProperty = (csvData, property, value) => {
-    let party = null;
-    if (csvData.data ?? false) {
-        csvData.data.some((row) => {
-            if (row[property] === value) {
-                party = row;
-                return true;
-            }
-            return false;
-        });
+export const findByProperty = (accountsData, property, value) => {
+    if (accountsData.data ?? false) {
+        return accountsData.data.find((row) => row[property] === value) ?? null;
     }
-    return party;
+    return null;
 };
 
 export const buildParserConfig = (processCallback, storeDataCallback) => {
@@ -168,39 +143,30 @@ export const buildParserConfig = (processCallback, storeDataCallback) => {
 };
 
 const initialState = {
-    csvData: {
-        lastUpdate: baseDate,
-    },
+    lastUpdate: baseDate,
 };
 
 const AccountsDataContext = createContext(initialState);
 
 export const AccountsDataProvider = function ({ children }) {
-    const [csvData, setCsvData] = useState(initialState.csvData);
+    const [accountsData, setAccountsData] = useState(initialState);
+    const { readRemoteFile } = usePapaParse();
 
     // selectors
-    const findPartyByFbName = (fbName) =>
-        findByProperty(csvData, 'fbName', fbName);
-    const findPartyByWpTags = (tags) => {
-        let party = null;
-        tags.some((tag) => {
-            party = findByProperty(csvData, 'tag', tag);
-            if (party) {
-                return true;
-            }
-            return false;
-        });
-        return party;
+    const loadAccountsData = () => {
+        readRemoteFile(
+            accountsFile,
+            buildParserConfig(processAccountsData, setAccountsData)
+        );
     };
 
     const value = useMemo(
         () => ({
-            csvData,
-            setCsvData,
-            findPartyByFbName,
-            findPartyByWpTags,
+            accountsData,
+            setAccountsData,
+            loadAccountsData,
         }),
-        [csvData]
+        [accountsData]
     );
 
     return (

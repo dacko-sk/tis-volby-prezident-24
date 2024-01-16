@@ -27,9 +27,7 @@ function CandidatesGallery() {
 
     return (
         <div className="my-4">
-            <h2 className="text-center mb-4">
-                {t(labels.candidates.monitoring)}
-            </h2>
+            <h2 className="mb-4">{t(labels.candidates.monitoring)}</h2>
             <Row className="gy-4">
                 {allCandidatesData.map((candidate) => (
                     <Col xs={6} md={3} key={candidate.name}>
