@@ -16,19 +16,22 @@ function Candidate() {
     const { candidateAccountData } = useAccountsData();
 
     const name = decodeSlug(slug);
+    const props = candidateProps(name);
+    const account = candidateAccountData(name);
     const candidate = {
-        account: candidateAccountData(name),
-        props: candidateProps(name),
+        name,
+        ...(props ?? {}),
+        account,
     };
 
     useEffect(() => {
-        if (!candidate.props) {
+        if (!props && account === false) {
             // redirect to home page in case candidate is unknown
             navigate(routes.home());
         }
     }, [candidate, navigate]);
 
-    if (!candidate.props) {
+    if (!props && account === false) {
         // stop rendering & let useEffect hook to redirect
         return null;
     }
@@ -41,7 +44,7 @@ function Candidate() {
                     <Nav.Link as={NavLink} to={routes.candidate(name)} end>
                         {t(labels.candidates.overview)}
                     </Nav.Link>
-                    {candidate.account !== false && (
+                    {account !== false && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.candidate(name, segments.TRANSACTIONS)}
@@ -49,7 +52,7 @@ function Candidate() {
                             {t(labels.candidates.funding)}
                         </Nav.Link>
                     )}
-                    {/* {(candidate.props.wp ?? false) && (
+                    {/* {(candidate.wp ?? false) && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.candidate(name, segments.ANALYSIS)}
@@ -63,7 +66,7 @@ function Candidate() {
                     >
                         {t(labels.online.navTitle)}
                     </Nav.Link> */}
-                    {(candidate.props.wp ?? false) && (
+                    {(candidate?.wp ?? false) && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.candidate(name, segments.NEWS)}
@@ -71,7 +74,7 @@ function Candidate() {
                             {t(labels.news.navTitle)}
                         </Nav.Link>
                     )}
-                    {/* {(candidate.props.wp ?? false) && (
+                    {/* {(candidate.wp ?? false) && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.candidate(name, segments.ASSETS)}

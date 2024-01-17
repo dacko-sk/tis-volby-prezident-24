@@ -11,10 +11,10 @@ function CandidateNews() {
     const candidate = useOutletContext();
 
     const content =
-        candidate.props.wp ?? false ? (
+        candidate.wp ?? false ? (
             <Posts
                 categories={[wpCat.news]}
-                tags={[candidate.props.wp]}
+                tags={[candidate.wp]}
                 template={templates.list}
             />
         ) : (
@@ -23,7 +23,7 @@ function CandidateNews() {
             </AlertWithIcon>
         );
 
-    setTitle(`${candidate.props.name} : Aktuality`);
+    setTitle(`${candidate.name} : Aktuality`);
 
     return <div className="subpage">{content}</div>;
 }

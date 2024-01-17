@@ -18,7 +18,7 @@ function CandidateTransactions() {
     useEffect(() => {
         if (candidate.account === false) {
             // redirect to candidate overview in case of no transparent account
-            navigate(routes.candidate(candidate.props.name));
+            navigate(routes.candidate(candidate.name));
         }
     }, [candidate, navigate]);
 
@@ -27,7 +27,7 @@ function CandidateTransactions() {
         return null;
     }
 
-    setTitle(`${candidate.props.name} : Financovanie`);
+    setTitle(`${candidate.name} : Financovanie`);
 
     return (
         <div className="subpage">

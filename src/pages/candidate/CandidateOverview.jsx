@@ -21,7 +21,7 @@ import Posts, { templates } from '../../components/wp/Posts';
 function CandidateOverview() {
     const candidate = useOutletContext();
 
-    setTitle(candidate.props.name);
+    setTitle(candidate.name);
 
     return (
         <div className="subpage">
@@ -90,7 +90,7 @@ function CandidateOverview() {
                             <Button
                                 as={Link}
                                 to={routes.candidate(
-                                    candidate.props.name,
+                                    candidate.name,
                                     segments.TRANSACTIONS
                                 )}
                                 variant="secondary"
@@ -102,17 +102,17 @@ function CandidateOverview() {
                 </Row>
             )}
 
-            {(candidate.props.wp ?? false) && (
+            {(candidate.wp ?? false) && (
                 <>
                     <h2 className="mt-4">{t(labels.news.latest)}</h2>
                     <Posts
                         categories={[wpCat.news]}
                         limit={2}
                         showMoreLink={routes.candidate(
-                            candidate.props.name,
+                            candidate.name,
                             segments.NEWS
                         )}
-                        tags={[candidate.props.wp]}
+                        tags={[candidate.wp]}
                         template={templates.condensed}
                     />
                 </>

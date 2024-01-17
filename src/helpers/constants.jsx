@@ -8,10 +8,10 @@ const candidatesImages = require.context(
 );
 
 const candidates = {
-    'Peter Pellegrini': {
-        fb: 403027089864701,
-        wp: 939,
-    },
+    // 'Peter Pellegrini': {
+    //     fb: 403027089864701,
+    //     wp: 939,
+    // },
     'Ivan Korčok': {
         fb: 1185998661417403,
         wp: 936,
