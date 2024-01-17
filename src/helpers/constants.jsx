@@ -8,22 +8,30 @@ const candidatesImages = require.context(
 );
 
 const candidates = {
-    // 'Peter Pellegrini': {
-    //     fb: 403027089864701,
-    //     wp: 939,
-    // },
-    'Ivan Korčok': {
-        fb: 1185998661417403,
-        wp: 936,
+    'Marta Čurajová': {
+        fb: null,
+        wp: 941,
+    },
+    'Krisztián Forró': {
+        fb: 1009998019021765,
+        wp: 940,
     },
     'Štefan Harabin': {
         fb: 1680731138870391,
         wp: 938,
     },
+    'Ivan Korčok': {
+        fb: 1185998661417403,
+        wp: 936,
+    },
     'Ján Kubiš': {
         fb: 106795542522284,
         wp: 937,
     },
+    // 'Peter Pellegrini': {
+    //     fb: 403027089864701,
+    //     wp: 939,
+    // },
 };
 
 export const candidateImage = (name) => {
