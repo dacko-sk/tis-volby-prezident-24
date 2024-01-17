@@ -1,7 +1,9 @@
 import { labels, t } from '../../helpers/dictionary';
 import { currencyFormat } from '../../helpers/helpers';
 
-import useAccountsData, { csvAggregatedKeys } from '../../hooks/AccountsData';
+import useAccountsData, {
+    aggregatedKeys as agk,
+} from '../../hooks/AccountsData';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 import Loading from '../general/Loading';
@@ -10,10 +12,7 @@ function TotalSpending() {
     const { accountsData } = useAccountsData();
 
     const total = (accountsData.data ?? []).reduce(
-        (sum, row) =>
-            row[csvAggregatedKeys.outgoing] > 0
-                ? sum + row[csvAggregatedKeys.outgoing]
-                : sum,
+        (sum, row) => (row[agk.outgoing] > 0 ? sum + row[agk.outgoing] : sum),
         0
     );
 

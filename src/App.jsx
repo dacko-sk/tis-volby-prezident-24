@@ -5,6 +5,7 @@ import {
     languageRoot,
     languages,
     routes,
+    segments,
     urlSegment,
 } from './helpers/routes';
 
@@ -14,6 +15,9 @@ import Layout from './Layout';
 import Analyses from './pages/Analyses';
 import Article from './pages/Article';
 import Candidate from './pages/Candidate';
+import CandidateNews from './pages/candidate/CandidateNews';
+import CandidateOverview from './pages/candidate/CandidateOverview';
+import CandidateTransactions from './pages/candidate/CandidateTransactions';
 import Candidates from './pages/Candidates';
 import Home from './pages/Home';
 import Online from './pages/Online';
@@ -41,7 +45,14 @@ function App() {
                                 [
                                     routes.candidate(true, '', lang),
                                     Candidate,
-                                    [],
+                                    [
+                                        ['', CandidateOverview],
+                                        [segments.NEWS, CandidateNews],
+                                        [
+                                            segments.TRANSACTIONS,
+                                            CandidateTransactions,
+                                        ],
+                                    ],
                                 ],
                                 [routes.search(true, lang), Search],
                             ].map(([path, Page, subpages]) => (

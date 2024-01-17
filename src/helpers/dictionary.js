@@ -12,7 +12,7 @@ import {
     transparencyClasses as atc,
 } from './wp';
 
-import { csvAccountKeys as ak } from '../hooks/AccountsData';
+import { accountKeys as ak } from '../hooks/AccountsData';
 
 export const labels = {
     account: {
@@ -29,6 +29,10 @@ export const labels = {
         expensesAmount: ['Počet výdavkov', 'Number of expenses'],
         incomesAmount: ['Počet príjmov', 'Number of incomes'],
         info: ['Informácie o kampani', 'Campaign details'],
+        noData: [
+            'Neevidujeme transparentný účet kandidáta',
+            'Transparent account of the candite is unknown',
+        ],
         overview: [
             'Prehľad transakcií na transparentnom účte',
             'Transparent Account Transactions',
@@ -509,6 +513,10 @@ export const labels = {
             'We monitor the following candidates',
         ],
         navTitle: ['Kandidáti', 'Candidates'],
+        noResults: [
+            'Hľadanému výrazu nezodpovedá žiaden kandidát.',
+            'No candidate matches the search query.',
+        ],
         overview: ['Prehľad', 'Overview'],
     },
     charts: {

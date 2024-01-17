@@ -4,7 +4,7 @@ import { sortByNumericProp } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
 import useAccountsData, {
-    csvAggregatedKeys as ak,
+    aggregatedKeys as agk,
 } from '../../hooks/AccountsData';
 
 import TisBarChart from '../charts/TisBarChart';
@@ -13,9 +13,9 @@ function Top10({ maxItems = 10 }) {
     const { accountsData } = useAccountsData();
 
     const columns = (accountsData.data ?? []).map((row) => ({
-        [ak.name]: candidateChartLabel(row[ak.name]),
-        [ak.incoming]: row[ak.incoming],
-        [ak.outgoing]: row[ak.outgoing],
+        [agk.name]: candidateChartLabel(row[agk.name]),
+        [agk.incoming]: row[agk.incoming],
+        [agk.outgoing]: row[agk.outgoing],
     }));
 
     return (
@@ -24,7 +24,7 @@ function Top10({ maxItems = 10 }) {
             className="mb-4"
             currency
             data={columns
-                .sort(sortByNumericProp(ak.outgoing))
+                .sort(sortByNumericProp(agk.outgoing))
                 .slice(0, maxItems)}
             subtitle={`${t(labels.charts.disclaimer)} ${t(
                 labels.charts.disclaimerClick

@@ -1,5 +1,3 @@
-import { decodeSlug } from './routes';
-
 import dummy from '../../public/img/user_grey.png';
 
 // import all csv files from the accounts folder via webpack
@@ -8,19 +6,8 @@ const candidatesImages = require.context(
     false,
     /\.jpg$/
 );
-export const candidateImage = (name) => {
-    let found = null;
-    candidatesImages.keys().some((key) => {
-        if (key.endsWith(`${name}.jpg`)) {
-            found = key;
-            return true;
-        }
-        return false;
-    });
-    return found ? candidatesImages(found) : dummy;
-};
 
-export const candidates = {
+const candidates = {
     'Peter Pellegrini': {
         fb: 403027089864701,
         wp: 939,
@@ -39,8 +26,14 @@ export const candidates = {
     },
 };
 
-export const candidateData = (slug) => {
-    const name = decodeSlug(slug);
+export const candidateImage = (name) => {
+    const file = candidatesImages
+        .keys()
+        .find((key) => key.endsWith(`${name}.jpg`));
+    return file ? candidatesImages(file) : dummy;
+};
+
+export const candidateProps = (name) => {
     if (candidates[name] ?? false) {
         return {
             ...candidates[name],
@@ -51,8 +44,8 @@ export const candidateData = (slug) => {
     return null;
 };
 
-export const allCandidatesData = Object.keys(candidates).map((candidate) =>
-    candidateData(candidate)
+export const allCandidatesProps = Object.keys(candidates).map((candidate) =>
+    candidateProps(candidate)
 );
 
 export const colorLightBlue = '#2bace2';

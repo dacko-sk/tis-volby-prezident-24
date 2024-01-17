@@ -28,15 +28,19 @@ export const accountsFile =
     'https://raw.githubusercontent.com/matusv/presidential-elections-slovakia-2024/main/aggregation_no_returns.csv';
 export const baseDate = 1705266940;
 
-export const csvAggregatedKeys = {
+export const aggregatedKeys = {
     account: 'url',
-    name: 'name',
+    balance: 'balance',
     incoming: 'sum_incoming',
+    name: 'name',
+    num_incoming: 'num_incoming',
+    num_outgoing: 'num_outgoing',
+    num_unique_donors: 'num_unique_donors',
     outgoing: 'sum_outgoing',
     timestamp: 'timestamp',
 };
 
-export const csvAccountKeys = {
+export const accountKeys = {
     account_name: 'account_name',
     date: 'date',
     amount: 'amount',
@@ -47,26 +51,26 @@ export const csvAccountKeys = {
     ss: 'ss',
 };
 
-export const getFileName = (account) => {
+export const getFileName = (accountData) => {
     if (
-        !(account[csvAggregatedKeys.name] ?? false) ||
-        !(account[csvAggregatedKeys.account] ?? false)
+        !(accountData[aggregatedKeys.name] ?? false) ||
+        !(accountData[aggregatedKeys.account] ?? false)
     ) {
         return null;
     }
     let fileName = null;
-    const match = account[csvAggregatedKeys.account].match(
+    const match = accountData[aggregatedKeys.account].match(
         /.*(?:SK\d{12})?(\d{10}).*/
     );
     if (match && match.length > 1) {
         // #1) IBAN / 10 digits account number match
         [, fileName] = match;
-    } else if (account[csvAggregatedKeys.account].length > 9) {
+    } else if (accountData[aggregatedKeys.account].length > 9) {
         // #2) last 10 characters
-        fileName = account[csvAggregatedKeys.account].substr(-10);
+        fileName = accountData[aggregatedKeys.account].substr(-10);
     }
     return fileName
-        ? accountFile(`${account[csvAggregatedKeys.name]} ${fileName}.csv`)
+        ? accountFile(`${accountData[aggregatedKeys.name]} ${fileName}.csv`)
         : null;
 };
 
@@ -77,33 +81,31 @@ export const processAccountsData = (data) => {
         pd.data.forEach((row, index) => {
             lastUpdate = Math.max(
                 lastUpdate,
-                row[csvAggregatedKeys.timestamp] ?? 0
+                row[aggregatedKeys.timestamp] ?? 0
             );
 
             // trim certain columns
-            [csvAggregatedKeys.account, csvAggregatedKeys.name].forEach(
-                (column) => {
-                    pd.data[index][column] = (row[column] ?? '').trim();
-                }
-            );
+            [aggregatedKeys.account, aggregatedKeys.name].forEach((column) => {
+                pd.data[index][column] = (row[column] ?? '').trim();
+            });
 
             // fix errors in account numbers
             if (
                 contains(
-                    pd.data[index][csvAggregatedKeys.account],
+                    pd.data[index][aggregatedKeys.account],
                     'transparentneucty.sk/?1/#/'
                 )
             ) {
-                pd.data[index][csvAggregatedKeys.account] = pd.data[index][
-                    csvAggregatedKeys.account
+                pd.data[index][aggregatedKeys.account] = pd.data[index][
+                    aggregatedKeys.account
                 ].replace('/?1/#/', '/#/');
             }
 
             // parse numbers
-            pd.data[index][csvAggregatedKeys.incoming] =
-                row[csvAggregatedKeys.incoming] ?? 0;
-            pd.data[index][csvAggregatedKeys.outgoing] = Math.abs(
-                row[csvAggregatedKeys.outgoing] ?? 0
+            pd.data[index][aggregatedKeys.incoming] =
+                row[aggregatedKeys.incoming] ?? 0;
+            pd.data[index][aggregatedKeys.outgoing] = Math.abs(
+                row[aggregatedKeys.outgoing] ?? 0
             );
             pd.data[index].balance = row.balance ?? 0;
             pd.data[index].num_incoming = row.num_incoming ?? 0;
@@ -160,11 +162,15 @@ export const AccountsDataProvider = function ({ children }) {
         );
     };
 
+    const candidateAccountData = (name) =>
+        findByProperty(accountsData, aggregatedKeys.name, name) ?? false;
+
     const value = useMemo(
         () => ({
             accountsData,
-            setAccountsData,
+            candidateAccountData,
             loadAccountsData,
+            setAccountsData,
         }),
         [accountsData]
     );

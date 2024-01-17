@@ -37,24 +37,24 @@ import VerticalTick, { tickFontSize } from './VerticalTick';
 import LastUpdateTag from '../general/LastUpdateTag';
 
 import './Charts.scss';
-import { csvAggregatedKeys as ak } from '../../hooks/AccountsData';
+import { aggregatedKeys as agk } from '../../hooks/AccountsData';
 
 export const columnVariants = {
     inOut: [
         {
-            key: ak.outgoing,
+            key: agk.outgoing,
             name: labels.charts.outgoing,
             color: colors.colorOrange,
         },
         {
-            key: ak.incoming,
+            key: agk.incoming,
             name: labels.charts.incoming,
             color: colors.colorDarkBlue,
         },
     ],
     spending: [
         {
-            key: ak.outgoing,
+            key: agk.outgoing,
             name: labels.charts.outgoing,
             color: colors.colorLightBlue,
         },

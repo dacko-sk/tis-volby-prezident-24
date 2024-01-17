@@ -2,7 +2,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useNavigate } from 'react-router-dom';
 
-import { allCandidatesData } from '../../helpers/constants';
+import { allCandidatesProps } from '../../helpers/constants';
 import { routes } from '../../helpers/routes';
 import { labels, t } from '../../helpers/dictionary';
 
@@ -29,7 +29,7 @@ function CandidatesGallery() {
         <div className="my-4">
             <h2 className="mb-4">{t(labels.candidates.monitoring)}</h2>
             <Row className="gy-4">
-                {allCandidatesData.map((candidate) => (
+                {allCandidatesProps.map((candidate) => (
                     <Col xs={6} md={3} key={candidate.name}>
                         <div
                             className="article analysis-preview"
