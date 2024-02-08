@@ -1,3 +1,5 @@
+import { csvConfig } from '../hooks/AdsData';
+
 import dummy from '../../public/img/user_grey.png';
 
 // import all csv files from the accounts folder via webpack
@@ -7,33 +9,6 @@ const candidatesImages = require.context(
     /\.jpg$/
 );
 
-const candidates = {
-    'Marta Čurajová': {
-        fb: null,
-        wp: 941,
-    },
-    'Krisztián Forró': {
-        fb: 1009998019021765,
-        wp: 940,
-    },
-    'Štefan Harabin': {
-        fb: 1680731138870391,
-        wp: 938,
-    },
-    'Ivan Korčok': {
-        fb: 1185998661417403,
-        wp: 936,
-    },
-    'Ján Kubiš': {
-        fb: 106795542522284,
-        wp: 937,
-    },
-    // 'Peter Pellegrini': {
-    //     fb: 403027089864701,
-    //     wp: 939,
-    // },
-};
-
 export const candidateImage = (name) => {
     const file = candidatesImages
         .keys()
@@ -41,20 +16,22 @@ export const candidateImage = (name) => {
     return file ? candidatesImages(file) : dummy;
 };
 
-export const candidateProps = (name) => {
-    if (candidates[name] ?? false) {
-        return {
-            ...candidates[name],
-            name,
-            image: candidateImage(name),
-        };
-    }
-    return null;
-};
+export const candidateData = (name, accountData, adsData) => {
+    const data = {
+        name,
+        image: candidateImage(name),
+        account: accountData,
+        ...(adsData ?? {}),
+    };
+    data.hasAccount = accountData !== false;
+    data.hasMeta = adsData && !!data[csvConfig.ACCOUNTS.columns.FB].length;
+    data.hasGoogle =
+        adsData && !!data[csvConfig.ACCOUNTS.columns.GOOGLE].length;
+    data.hasWp = adsData && !!data[csvConfig.ACCOUNTS.columns.WP];
+    data.isValid = data.image !== dummy || data.hasAccount || adsData !== false;
 
-export const allCandidatesProps = Object.keys(candidates).map((candidate) =>
-    candidateProps(candidate)
-);
+    return data;
+};
 
 export const colorLightBlue = '#2bace2';
 export const colorLightBlueDs = '#b9c6cc';

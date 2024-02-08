@@ -13,14 +13,15 @@ import {
     YAxis,
 } from 'recharts';
 
+import { isMobile } from '../../helpers/browser';
 import {
     BarsTooltip,
+    columnVariants,
     horizontalYaxisWidth,
     prepareAvgDeltaPctData,
     shortChartNames,
     verticalYaxisWidth,
 } from '../../helpers/charts';
-import { colors } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import {
     currencyFormat,
@@ -37,36 +38,6 @@ import VerticalTick, { tickFontSize } from './VerticalTick';
 import LastUpdateTag from '../general/LastUpdateTag';
 
 import './Charts.scss';
-import { aggregatedKeys as agk } from '../../hooks/AccountsData';
-
-export const columnVariants = {
-    inOut: [
-        {
-            key: agk.outgoing,
-            name: labels.charts.outgoing,
-            color: colors.colorOrange,
-        },
-        {
-            key: agk.incoming,
-            name: labels.charts.incoming,
-            color: colors.colorDarkBlue,
-        },
-    ],
-    spending: [
-        {
-            key: agk.outgoing,
-            name: labels.charts.outgoing,
-            color: colors.colorLightBlue,
-        },
-    ],
-    uniqueDonors: [
-        {
-            key: 'unique',
-            name: labels.charts.uniqueDonors,
-            color: colors.colorOrange,
-        },
-    ],
-};
 
 function TisBarChart({
     barHeight,
@@ -164,7 +135,7 @@ function TisBarChart({
                         vertical
                             ? {
                                   height: `${
-                                      55 +
+                                      (isMobile ? 80 : 55) +
                                       data.length *
                                           (barHeight ??
                                               Math.max(2, labelLines) * 20)

@@ -16,6 +16,7 @@ import Analyses from './pages/Analyses';
 import Article from './pages/Article';
 import Candidate from './pages/Candidate';
 import CandidateNews from './pages/candidate/CandidateNews';
+import CandidateOnline from './pages/candidate/CandidateOnline';
 import CandidateOverview from './pages/candidate/CandidateOverview';
 import CandidateTransactions from './pages/candidate/CandidateTransactions';
 import Candidates from './pages/Candidates';
@@ -48,6 +49,7 @@ function App() {
                                     [
                                         ['', CandidateOverview],
                                         [segments.NEWS, CandidateNews],
+                                        [segments.ONLINE, CandidateOnline],
                                         [
                                             segments.TRANSACTIONS,
                                             CandidateTransactions,

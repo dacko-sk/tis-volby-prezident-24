@@ -1,21 +1,19 @@
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Link, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 
 import { setTitle } from '../../helpers/browser';
 import { colors } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
-import { currencyFormat } from '../../helpers/helpers';
 import { routes, segments } from '../../helpers/routes';
 import { wpCat } from '../../helpers/wp';
 
 import { aggregatedKeys as agk } from '../../hooks/AccountsData';
+import { csvConfig } from '../../hooks/AdsData';
 
 import TisBarChart from '../../components/charts/TisBarChart';
 import AlertWithIcon from '../../components/general/AlertWithIcon';
-import LastUpdateTag from '../../components/general/LastUpdateTag';
-import Loading from '../../components/general/Loading';
+import HeroNumber from '../../components/general/HeroNumber';
 import Posts, { templates } from '../../components/wp/Posts';
 
 function CandidateOverview() {
@@ -64,45 +62,26 @@ function CandidateOverview() {
                             lastUpdate={false}
                         />
                     </Col>
-                    <Col lg={6} className="text-center">
-                        <div className="total-spending">
-                            <h2 className="mt-xxl-4">
-                                {t(labels.account.candidateSpending)}
-                            </h2>
-                            <div className="hero-number">
-                                {candidate.account ?? false ? (
-                                    currencyFormat(
-                                        candidate.account[agk.outgoing]
-                                    )
-                                ) : (
-                                    <Loading small />
-                                )}
-                                <LastUpdateTag
-                                    timestamp={
-                                        candidate.account?.[agk.timestamp] ??
-                                        null
-                                    }
-                                />
-                            </div>
-                        </div>
-
-                        <div className="buttons mt-4">
-                            <Button
-                                as={Link}
-                                to={routes.candidate(
-                                    candidate.name,
-                                    segments.TRANSACTIONS
-                                )}
-                                variant="secondary"
-                            >
-                                {t(labels.account.allTransactions)}
-                            </Button>
-                        </div>
+                    <Col lg={6}>
+                        <HeroNumber
+                            button={t(labels.account.allTransactions)}
+                            className="mt-xxl-4"
+                            lastUpdate={
+                                candidate.account?.[agk.timestamp] ?? null
+                            }
+                            link={routes.candidate(
+                                candidate.name,
+                                segments.TRANSACTIONS
+                            )}
+                            loading={!(candidate.account ?? false)}
+                            number={candidate.account?.[agk.outgoing]}
+                            title={t(labels.account.candidateSpending)}
+                        />
                     </Col>
                 </Row>
             )}
 
-            {(candidate.wp ?? false) && (
+            {candidate.hasWp && (
                 <>
                     <h2 className="mt-4">{t(labels.news.latest)}</h2>
                     <Posts
@@ -112,7 +91,7 @@ function CandidateOverview() {
                             candidate.name,
                             segments.NEWS
                         )}
-                        tags={[candidate.wp]}
+                        tags={[candidate[csvConfig.ACCOUNTS.columns.WP]]}
                         template={templates.condensed}
                     />
                 </>

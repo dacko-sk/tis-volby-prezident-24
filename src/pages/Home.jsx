@@ -8,9 +8,8 @@ import { wpCat } from '../helpers/wp';
 
 import Top10 from '../components/accounts/Top10';
 import TotalSpending from '../components/accounts/TotalSpending';
-// import TotalAdsSpending from '../components/ads/TotalAdsSpending';
-import CandidatesGallery from '../components/candidates/CandidatesGallery';
-// import Top10Ads from '../components/charts/Top10Ads';
+import Top10Ads from '../components/ads/Top10Ads';
+// import CandidatesGallery from '../components/candidates/CandidatesGallery';
 import DonateButton from '../components/general/DonateButton';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
 import Title from '../components/structure/Title';
@@ -43,7 +42,7 @@ function Home() {
                 <DonateButton long xl />
             </div>
 
-            <CandidatesGallery />
+            {/* <CandidatesGallery /> */}
 
             {/* <Posts
                 categories={[wpCat.featured]}
@@ -52,9 +51,7 @@ function Home() {
                 template={templates.featured}
             /> */}
 
-            {/* <TotalAdsSpending /> */}
-
-            {/* <Top10Ads /> */}
+            <Top10Ads />
 
             <h2 className="mt-4 mb-3">{t(labels.news.latest)}</h2>
             <Posts

@@ -1,12 +1,10 @@
 import { labels, t } from '../../helpers/dictionary';
-import { currencyFormat } from '../../helpers/helpers';
 
 import useAccountsData, {
     aggregatedKeys as agk,
 } from '../../hooks/AccountsData';
 
-import LastUpdateTag from '../general/LastUpdateTag';
-import Loading from '../general/Loading';
+import HeroNumber from '../general/HeroNumber';
 
 function TotalSpending() {
     const { accountsData } = useAccountsData();
@@ -17,19 +15,13 @@ function TotalSpending() {
     );
 
     return (
-        <div className="total-spending">
-            <h2>{t(labels.account.totalSpending)}</h2>
-            <div className="hero-number">
-                {accountsData.data ?? false ? (
-                    currencyFormat(total)
-                ) : (
-                    <Loading small />
-                )}
-                <LastUpdateTag timestamp={accountsData.lastUpdate ?? null}>
-                    {t(labels.account.totalDisclaimer)}
-                </LastUpdateTag>
-            </div>
-        </div>
+        <HeroNumber
+            disclaimer={t(labels.account.totalDisclaimer)}
+            lastUpdate={accountsData.lastUpdate ?? null}
+            loading={!(accountsData.data ?? false)}
+            number={total}
+            title={t(labels.account.totalSpending)}
+        />
     );
 }
 

@@ -51,6 +51,11 @@ export const accountKeys = {
     ss: 'ss',
 };
 
+const initialState = {
+    lastUpdate: baseDate,
+    loaded: false,
+};
+
 export const getFileName = (accountData) => {
     if (
         !(accountData[aggregatedKeys.name] ?? false) ||
@@ -116,6 +121,7 @@ export const processAccountsData = (data) => {
         return {
             ...pd,
             lastUpdate,
+            loaded: true,
         };
     }
     return data;
@@ -144,10 +150,6 @@ export const buildParserConfig = (processCallback, storeDataCallback) => {
     };
 };
 
-const initialState = {
-    lastUpdate: baseDate,
-};
-
 const AccountsDataContext = createContext(initialState);
 
 export const AccountsDataProvider = function ({ children }) {
@@ -162,15 +164,23 @@ export const AccountsDataProvider = function ({ children }) {
         );
     };
 
+    const allTransparentCandidatesNames = () =>
+        accountsData.loaded
+            ? accountsData.data.map((row) => row[aggregatedKeys.name] ?? null)
+            : null;
+
     const candidateAccountData = (name) =>
-        findByProperty(accountsData, aggregatedKeys.name, name) ?? false;
+        accountsData.loaded
+            ? findByProperty(accountsData, aggregatedKeys.name, name) ?? false
+            : null;
 
     const value = useMemo(
         () => ({
             accountsData,
-            candidateAccountData,
-            loadAccountsData,
             setAccountsData,
+            loadAccountsData,
+            allTransparentCandidatesNames,
+            candidateAccountData,
         }),
         [accountsData]
     );

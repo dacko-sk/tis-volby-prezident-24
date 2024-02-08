@@ -89,3 +89,10 @@ tspan {
 .pie-inactive {
   opacity: 0.5;
 }
+
+.recharts-pie {
+  // hide labels of all but first pie
+  & + & .recharts-pie-labels {
+    visibility: hidden;
+  }
+}

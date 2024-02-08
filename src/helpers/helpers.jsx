@@ -93,6 +93,15 @@ export const getTimeFromDate = (string) => {
     return Number.isNaN(t) ? 0 : t / 1000;
 };
 
+export const getTimestampFromDate = (date) => {
+    const dateParts = date.replaceAll('/', '.').replaceAll(' ', '').split('.');
+    return dateParts.length === 3
+        ? new Date(
+              `${dateParts[2]}/${dateParts[1]}/${dateParts[0]} 23:59:59`
+          ).getTime() / 1000
+        : 0;
+};
+
 export const shortenValue = (value, length, removals) => {
     if (value) {
         let shorten = value;
@@ -187,8 +196,25 @@ export const sortNumbers = (asc) => (a, b) => (asc ?? true ? a - b : b - a);
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];
 
+export const sortByTextProp = (prop) => (a, b) =>
+    a[prop].localeCompare(b[prop]);
+
+export const sortByName = sortByTextProp('name');
+
 export const sortAlphabetically = (asc) => (a, b) =>
     asc ?? true ? a.localeCompare(b) : b.localeCompare(a);
+
+export const getLastWord = (inputString) => {
+    if (!inputString.trim()) {
+        return '';
+    }
+
+    const words = inputString.split(' ');
+    return words[words.length - 1];
+};
+
+export const sortBySurname = (a, b) =>
+    getLastWord(a).localeCompare(getLastWord(b));
 
 export const sumOfValues = (obj) =>
     Object.values(obj).reduce((sum, val) => sum + val, 0);
