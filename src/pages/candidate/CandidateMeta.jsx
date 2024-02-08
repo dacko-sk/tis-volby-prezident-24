@@ -300,9 +300,9 @@ function CandidateMeta({
     };
 
     let content = null;
-    if (!sheetsData.loaded) {
+    if (!sheetsData.loaded || !metaApiData.loaded) {
         // waiting for data or error in loding
-        content = <Loading error={metaApiData.error} />;
+        content = <Loading error={sheetsData.error || metaApiData.loaded} />;
     } else if (totalSpending > 0) {
         content = (
             <Accordion
@@ -343,8 +343,8 @@ function CandidateMeta({
                         disclaimer={t(
                             labels.ads.meta.amount.candidateDisclaimer
                         )}
-                        lastUpdate={sheetsData.lastUpdateFb || null}
-                        loading={!sheetsData.loaded}
+                        lastUpdate={timestamp || null}
+                        loading={!metaApiData.loaded}
                         number={totalAmount}
                         title={t(labels.ads.meta.amount.title)}
                     />

@@ -411,11 +411,6 @@ function Meta({
         </Accordion.Item>
     ));
 
-    if (!sheetsData.loaded) {
-        // waiting for data or error in loding
-        return <Loading error={metaApiData.error} />;
-    }
-
     const onSelect = (ak) => {
         // open/close accordion
         setActiveKeys(ak);
@@ -426,6 +421,23 @@ function Meta({
             }
         });
     };
+
+    let content = null;
+    if (!sheetsData.loaded) {
+        // waiting for data or error in loding
+        content = <Loading error={sheetsData.error} />;
+    } else {
+        content = (
+            <Accordion
+                className="mt-4"
+                activeKey={activeKeys}
+                alwaysOpen
+                onSelect={onSelect}
+            >
+                {accordions}
+            </Accordion>
+        );
+    }
 
     setTitle('Online kampane Meta');
 
@@ -448,21 +460,14 @@ function Meta({
                     <HeroNumber
                         currency={false}
                         disclaimer={t(labels.ads.meta.amount.disclaimer)}
-                        lastUpdate={sheetsData.lastUpdateFb || null}
-                        loading={!sheetsData.loaded}
+                        lastUpdate={timestamp || null}
+                        loading={!metaApiData.loaded}
                         number={totalAmount}
                         title={t(labels.ads.meta.amount.title)}
                     />
                 </Col>
             </Row>
-            <Accordion
-                className="mt-4"
-                activeKey={activeKeys}
-                alwaysOpen
-                onSelect={onSelect}
-            >
-                {accordions}
-            </Accordion>
+            {content}
         </div>
     );
 }

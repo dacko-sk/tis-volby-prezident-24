@@ -56,6 +56,7 @@ const initialState = {
         error: null,
         pages: {},
         lastUpdate: 0,
+        loaded: false,
     },
 };
 
@@ -71,7 +72,7 @@ const filterPoliticAccounts = (candidates) => (account) => {
 };
 
 export const loadingErrorSheets = (error) => {
-    return { ...initialState.sheetsData, error };
+    return { ...initialState.sheetsData, error, loaded: true };
 };
 
 export const processDataSheets = (data) => {
@@ -131,12 +132,12 @@ export const processDataSheets = (data) => {
 };
 
 export const loadingErrorMetaApi = (error, originalData) => {
-    return { ...originalData, error };
+    return { ...originalData, error, loaded: true };
 };
 
 export const processDataMetaApi = (data) => {
     if (data.pages ?? false) {
-        const pd = { ...initialState.metaApiData, ...data };
+        const pd = { ...initialState.metaApiData, ...data, loaded: true };
         Object.entries(data.pages).forEach(([pageId, pageProps]) => {
             // find highest date
             pd.lastUpdate = Math.max(pd.lastUpdate, pageProps.updated ?? 0);
