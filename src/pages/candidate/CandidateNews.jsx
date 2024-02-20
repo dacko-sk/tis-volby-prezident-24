@@ -24,7 +24,7 @@ function CandidateNews() {
         </AlertWithIcon>
     );
 
-    setTitle(`${candidate.name} : Aktuality`);
+    setTitle(`${candidate.name} : ${t(labels.news.pageTitle)}`);
 
     return <div className="subpage">{content}</div>;
 }

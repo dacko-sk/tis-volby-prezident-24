@@ -540,6 +540,7 @@ export const labels = {
         [el.n20]: ['Parlamentné\nvoľby 2020', 'Parliamentary\nelections 2020'],
         [el.s22]: ['Samosprávne\nvoľby 2022', 'Municipal\nelections 2022'],
         [el.n23]: ['Parlamentné\nvoľby 2023', 'Parliamentary\nelections 2023'],
+        [el.e24]: ['Európske\nvoľby 2024', 'European\nelections 2024'],
         account: ['Transparentný účet', 'Transparent account'],
         date: ['Dátum konania volieb', 'Elections date'],
         over: ['Voľby sa skončili', 'Elections ended'],

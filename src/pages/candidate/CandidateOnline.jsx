@@ -9,7 +9,7 @@ import CandidateMeta from './CandidateMeta';
 function CandidateOnline() {
     const candidate = useOutletContext();
 
-    setTitle(`${candidate.name} : Online`);
+    setTitle(`${candidate.name} : ${t(labels.ads.pageTitle)}`);
 
     return (
         <div className="subpage">

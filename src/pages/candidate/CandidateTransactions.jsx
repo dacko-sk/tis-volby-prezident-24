@@ -27,7 +27,7 @@ function CandidateTransactions() {
         return null;
     }
 
-    setTitle(`${candidate.name} : Financovanie`);
+    setTitle(`${candidate.name} : ${t(labels.candidates.funding)}`);
 
     return (
         <div className="subpage">
