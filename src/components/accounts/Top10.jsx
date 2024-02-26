@@ -1,5 +1,5 @@
 import { labels, t } from '../../helpers/dictionary';
-import { candidateChartLabel } from '../../helpers/charts';
+import { candidateChartLabel, chartKeys } from '../../helpers/charts';
 import { sortByNumericProp } from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
@@ -13,9 +13,9 @@ function Top10({ maxItems = 10 }) {
     const { accountsData } = useAccountsData();
 
     const columns = (accountsData.data ?? []).map((row) => ({
-        [agk.name]: candidateChartLabel(row[agk.name]),
-        [agk.incoming]: row[agk.incoming],
-        [agk.outgoing]: row[agk.outgoing],
+        name: candidateChartLabel(row[agk.name]),
+        [chartKeys.INCOMING]: row[agk.incoming],
+        [chartKeys.OUTGOING]: row[agk.outgoing],
     }));
 
     return (
@@ -24,7 +24,7 @@ function Top10({ maxItems = 10 }) {
             className="mb-4"
             currency
             data={columns
-                .sort(sortByNumericProp(agk.outgoing))
+                .sort(sortByNumericProp(chartKeys.OUTGOING))
                 .slice(0, maxItems)}
             subtitle={`${t(labels.charts.disclaimer)} ${t(
                 labels.charts.disclaimerClick

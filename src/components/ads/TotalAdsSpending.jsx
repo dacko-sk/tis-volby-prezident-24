@@ -1,31 +1,29 @@
 import { Col, Row } from 'react-bootstrap';
 
 import { labels, t } from '../../helpers/dictionary';
-import { currencyFormat /* , fixNumber */ } from '../../helpers/helpers';
+import { currencyFormat } from '../../helpers/helpers';
 
-import useAdsData /* , { csvConfig } */ from '../../hooks/AdsData';
+import useAdsData, { csvConfig } from '../../hooks/AdsData';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 import Loading from '../general/Loading';
 
-function TotalAdsSpending(/* {
-    googleColumns = csvConfig.GOOGLE.columns,
-} */) {
+function TotalAdsSpending() {
     const { sheetsData, mergedWeeksData } = useAdsData();
 
     // parse data
     let totalMeta = 0;
-    // let totalGoogle = 0;
+    let totalGoogle = 0;
     if (sheetsData.lastUpdateFb) {
         Object.values(mergedWeeksData).forEach((pageProps) => {
             totalMeta += pageProps.outgoing;
         });
     }
-    // if (sheetsData.lastUpdateGgl) {
-    //     sheetsData.googleAds.forEach((pageProps) => {
-    //         totalGoogle += fixNumber(pageProps[googleColumns.SPENDING]);
-    //     });
-    // }
+    if (sheetsData.lastUpdateGgl) {
+        sheetsData.googleAds.forEach((pageProps) => {
+            totalGoogle += pageProps[csvConfig.GOOGLE.columns.SPENDING];
+        });
+    }
 
     return (
         <div className="mt-4">
@@ -45,7 +43,7 @@ function TotalAdsSpending(/* {
                         </LastUpdateTag>
                     </div>
                 </Col>
-                {/* <Col lg={6}>
+                <Col lg={6}>
                     <h2>{t(labels.ads.google.totalSpendingTitle)}</h2>
                     <div className="hero-number">
                         {sheetsData.lastUpdateGgl ? (
@@ -59,7 +57,7 @@ function TotalAdsSpending(/* {
                             {t(labels.ads.google.totalDisclaimer)}
                         </LastUpdateTag>
                     </div>
-                </Col> */}
+                </Col>
             </Row>
         </div>
     );

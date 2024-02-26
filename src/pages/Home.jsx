@@ -9,6 +9,7 @@ import { wpCat } from '../helpers/wp';
 import Top10 from '../components/accounts/Top10';
 import TotalSpending from '../components/accounts/TotalSpending';
 import Top10Ads from '../components/ads/Top10Ads';
+import TotalAdsSpending from '../components/ads/TotalAdsSpending';
 // import CandidatesGallery from '../components/candidates/CandidatesGallery';
 import DonateButton from '../components/general/DonateButton';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
@@ -51,6 +52,7 @@ function Home() {
                 template={templates.featured}
             /> */}
 
+            <TotalAdsSpending />
             <Top10Ads />
 
             <h2 className="mt-4 mb-3">{t(labels.news.latest)}</h2>

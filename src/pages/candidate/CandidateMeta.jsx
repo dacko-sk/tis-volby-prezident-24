@@ -4,16 +4,16 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import { colors } from '../../helpers/constants';
+import { labels, t } from '../../helpers/dictionary';
+import { sortByNumericProp } from '../../helpers/helpers';
 import {
     ageColors,
     attributionColors,
     attributionKeys,
     genderColors,
     regionOptions,
-} from '../../helpers/charts';
-import { colors } from '../../helpers/constants';
-import { labels, t } from '../../helpers/dictionary';
-import { sortByNumericProp } from '../../helpers/helpers';
+} from '../../helpers/online';
 
 import useAdsData from '../../hooks/AdsData';
 
@@ -24,15 +24,15 @@ import HeroNumber from '../../components/general/HeroNumber';
 import Loading from '../../components/general/Loading';
 
 function CandidateMeta({
-    chartKeys = {
+    accKeys = {
         REGIONS: 'REGIONS',
         DEMOGRAPHY: 'DEMOGRAPHY',
         ATTRIBUTION: 'ATTRIBUTION',
     },
 }) {
     const candidate = useOutletContext();
-    const [activeKeys, setActiveKeys] = useState([chartKeys.REGIONS]);
-    const [loadedCharts, setLoadedCharts] = useState([chartKeys.REGIONS]);
+    const [activeKeys, setActiveKeys] = useState([accKeys.REGIONS]);
+    const [loadedCharts, setLoadedCharts] = useState([accKeys.REGIONS]);
 
     const {
         findCandidateForMetaAccount,
@@ -135,7 +135,7 @@ function CandidateMeta({
                     }
                 });
 
-                if (loadedCharts.includes(chartKeys.DEMOGRAPHY)) {
+                if (loadedCharts.includes(accKeys.DEMOGRAPHY)) {
                     Object.entries(pageProps.demography).forEach(
                         ([key, size]) => {
                             const [gender, age] = key.split('|');
@@ -145,7 +145,7 @@ function CandidateMeta({
                     );
                 }
 
-                if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
+                if (loadedCharts.includes(accKeys.ATTRIBUTION)) {
                     Object.keys(attributionKeys).forEach((key) => {
                         if (pageProps.attribution.mandatory[key] ?? false) {
                             attributions[key] =
@@ -210,7 +210,7 @@ function CandidateMeta({
     }
 
     const charts = {
-        [chartKeys.REGIONS]: loadedCharts.includes(chartKeys.REGIONS) ? (
+        [accKeys.REGIONS]: loadedCharts.includes(accKeys.REGIONS) ? (
             <Row className="gy-3">
                 <Col xl={6}>
                     <TisPieChart
@@ -238,7 +238,7 @@ function CandidateMeta({
                 </Col>
             </Row>
         ) : null,
-        [chartKeys.DEMOGRAPHY]: loadedCharts.includes(chartKeys.DEMOGRAPHY) ? (
+        [accKeys.DEMOGRAPHY]: loadedCharts.includes(accKeys.DEMOGRAPHY) ? (
             <Row className="gy-3">
                 <Col xl={6}>
                     <TisPieChart
@@ -260,9 +260,7 @@ function CandidateMeta({
                 </Col>
             </Row>
         ) : null,
-        [chartKeys.ATTRIBUTION]: loadedCharts.includes(
-            chartKeys.ATTRIBUTION
-        ) ? (
+        [accKeys.ATTRIBUTION]: loadedCharts.includes(accKeys.ATTRIBUTION) ? (
             <Row className="gy-3">
                 <Col xl={6}>
                     <TisPieChart
@@ -278,9 +276,9 @@ function CandidateMeta({
     };
 
     const accordions = [
-        [chartKeys.REGIONS, labels.ads.meta.regions.title],
-        [chartKeys.DEMOGRAPHY, labels.ads.meta.demography.title],
-        [chartKeys.ATTRIBUTION, labels.ads.meta.attribution.title],
+        [accKeys.REGIONS, labels.ads.meta.regions.title],
+        [accKeys.DEMOGRAPHY, labels.ads.meta.demography.title],
+        [accKeys.ATTRIBUTION, labels.ads.meta.attribution.title],
     ].map(([key, label]) => (
         <Accordion.Item key={key} eventKey={key}>
             <Accordion.Header>{t(label)}</Accordion.Header>
@@ -340,13 +338,11 @@ function CandidateMeta({
                 <Col lg={6}>
                     <HeroNumber
                         currency={false}
-                        disclaimer={t(
-                            labels.ads.meta.amount.candidateDisclaimer
-                        )}
+                        disclaimer={t(labels.ads.amount.candidateDisclaimer)}
                         lastUpdate={timestamp || null}
                         loading={!metaApiData.loaded}
                         number={totalAmount}
-                        title={t(labels.ads.meta.amount.title)}
+                        title={t(labels.ads.amount.title)}
                     />
                 </Col>
             </Row>

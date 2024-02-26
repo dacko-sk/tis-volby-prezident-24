@@ -135,7 +135,7 @@ function TisBarChart({
                         vertical
                             ? {
                                   height: `${
-                                      (isMobile ? 80 : 55) +
+                                      (isMobile ? 80 : 56) +
                                       data.length *
                                           (barHeight ??
                                               Math.max(2, labelLines) * 20)

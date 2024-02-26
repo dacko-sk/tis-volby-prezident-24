@@ -3,7 +3,7 @@ import Tab from 'react-bootstrap/Tab';
 
 import { labels, t } from '../helpers/dictionary';
 
-// import Google from '../components/ads/Google';
+import Google from '../components/ads/Google';
 import Meta from '../components/ads/Meta';
 import Title from '../components/structure/Title';
 
@@ -17,9 +17,9 @@ function Online() {
                         <Nav.Link eventKey="facebook">
                             {t(labels.ads.meta.title)}
                         </Nav.Link>
-                        {/* <Nav.Link eventKey="google">
+                        <Nav.Link eventKey="google">
                             {t(labels.ads.google.title)}
-                        </Nav.Link> */}
+                        </Nav.Link>
                     </Nav>
                 </div>
 
@@ -27,7 +27,9 @@ function Online() {
                     <Tab.Pane eventKey="facebook">
                         <Meta />
                     </Tab.Pane>
-                    {/* <Tab.Pane eventKey="google"><Google /></Tab.Pane> */}
+                    <Tab.Pane eventKey="google">
+                        <Google />
+                    </Tab.Pane>
                 </Tab.Content>
             </Tab.Container>
         </section>

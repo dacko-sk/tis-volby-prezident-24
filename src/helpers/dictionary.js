@@ -56,10 +56,21 @@ export const labels = {
         ],
     },
     ads: {
+        amount: {
+            candidateDisclaimer: [
+                'Počet reklám kandidáta od 1. novembra 2023.',
+                'Amount of candidate ads since November 1, 2023.',
+            ],
+            disclaimer: [
+                'Počet reklám všetkých kandidátov od 1. novembra 2023.',
+                'Amount of ads of all candidates since November 1, 2023.',
+            ],
+            title: ['Počet reklám', 'Amount of ads'],
+        },
         google: {
             disclaimer: [
-                'Politickú reklamu strán a ich politikov, zverejnenú prostredníctvom služieb Google Ads a Google Display & Video 360, sledujeme vďaka údajom, ktoré publikuje spoločnosť Google v Centre transparentnosti reklám. Sumy sú uvedené bez DPH.',
-                'Political ads of parties and their politicians published in Google Ads and Google Display & Video 360 platforms is monitored thanks to the data published by Google in Google Ads Transparency Center. Amounts are without VAT.',
+                'Politickú reklamu kandidátov, zverejnenú prostredníctvom služieb Google Ads a Google Display & Video 360, sledujeme vďaka údajom, ktoré publikuje spoločnosť Google v Centre transparentnosti reklám. Sumy sú uvedené vrátane DPH.',
+                'Political ads of candidates published in Google Ads and Google Display & Video 360 platforms is monitored thanks to the data published by Google in Google Ads Transparency Center. Amounts are with VAT.',
             ],
             format: {
                 disclaimer: [
@@ -69,20 +80,23 @@ export const labels = {
                 title: ['Formáty reklamy', 'Ad format'],
             },
             spending: {
-                accountsTitle: [
-                    'Profily s výdavkami na reklamu nad 100 €',
-                    'Profiles with advertising expenses exceeding 100 €',
-                ],
                 disclaimer: [
                     'Zobrazené sú len politické účty, ktoré prostredníctvom služieb Google Ads a Google Display & Video 360 uverejnili reklamy v hodnote nad 100 € od 1. novembra 2023.',
                     'We list only profiles whose spending on Google Ads and Google Display & Video 360 platforms exceeded 100 € since November 1, 2023.',
                 ],
+                title: [
+                    'Kandidáti s výdavkami na reklamu nad 100 €',
+                    'Candidates with advertising expenses exceeding 100 €',
+                ],
             },
             title: ['Google'],
-            topTitle: ['Top 10 Google kampaní', 'Top 10 Google campaigns'],
             totalDisclaimer: [
                 'Súčet výdavkov politických účtov, ktoré prostredníctvom služieb Google Ads a Google Display & Video 360 uverejnili reklamy v hodnote nad 100 € od 1. novembra 2023.',
                 'Sum of expenses of profiles whose spending on Google Ads and Google Display & Video 360 platforms exceeded 100 € since November 1, 2023.',
+            ],
+            totalCandidateDisclaimer: [
+                'Súčet výdavkov kandidáta na politickú reklamu uverejnenú prostredníctvom služieb Google Ads a Google Display & Video 360 od 1. novembra 2023.',
+                `Sum of candidate's advertising expenses on Google Ads and Google Display & Video 360 platforms exceeded 100 € since November 1, 2023.`,
             ],
             totalSpendingTitle: [
                 'Výdavky na Google reklamu',
@@ -90,17 +104,6 @@ export const labels = {
             ],
         },
         meta: {
-            amount: {
-                candidateDisclaimer: [
-                    'Počet reklám kandidáta od 1. novembra 2023.',
-                    'Amount of candidate ads since November 1, 2023.',
-                ],
-                disclaimer: [
-                    'Počet reklám všetkých kandidátov od 1. novembra 2023.',
-                    'Amount of ads of all candidates since November 1, 2023.',
-                ],
-                title: ['Počet reklám', 'Amount of ads'],
-            },
             attribution: {
                 allTitle: [
                     'Bilancia všetkých strán',
@@ -220,7 +223,6 @@ export const labels = {
                 ],
             },
             title: ['Meta'],
-            topTitle: ['Top 10 Meta kampaní', 'Top 10 Meta campaigns'],
             totalDisclaimer: [
                 'Súčet výdavkov na politickú reklamu na sociálnych sieťach platformy Meta. Započítane sú všetky profily, ktorých výdavky od 1. novembra 2023 alebo týždňové výdavky od začiatku kampane 9. januára 2024 presiahli 100 €.',
                 'Sum of advertising expenses on social networks of Meta. Includes Meta profiles whose advertising expenses from November 1, 2023 or weekly expenses from the beginning of campaign on January 9, 2024 exceeded 100 €',
@@ -248,6 +250,11 @@ export const labels = {
             'Zistiť viac o online kampani',
             'Learn more about Online Campaigns',
         ],
+        topDisclaimer: [
+            'Zobrazení sú len kandidáti, ktorých týždenné výdavky na online reklamu na platformách Meta alebo Google presahujú 100 €.',
+            'Includes candidates whose weekly advertising expenses on Meta or Google platforms are higher than 100 €.',
+        ],
+        topTitle: ['Top 10 online kampaní', 'Top 10 online campaigns'],
     },
     all: ['Zobraziť všetko', 'Show all'],
     analyses: {

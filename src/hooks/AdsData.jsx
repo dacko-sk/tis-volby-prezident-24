@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
-import { getTimestampFromDate, isNumeric } from '../helpers/helpers';
+import { fixNumber, getTimestampFromDate, isNumeric } from '../helpers/helpers';
 
 export const sheetsId = '1trHKAwQ2ryhzrG5GsSK9BDVMEg3_yaSEOujGVPPeI5U';
 
@@ -105,13 +105,27 @@ export const processDataSheets = (data) => {
                 }
                 case csvConfig.GOOGLE.name: {
                     pd.googleAds = sheet.data;
-                    sheet.data.forEach((pageData) => {
+                    sheet.data.forEach((pageData, index) => {
                         const time = getTimestampFromDate(
                             pageData[csvConfig.GOOGLE.columns.UPDATED]
                         );
                         if (time > pd.lastUpdateGgl) {
                             pd.lastUpdateGgl = time;
                         }
+                        // process numbers & add VAT
+                        pd.googleAds[index][csvConfig.GOOGLE.columns.AMOUNT] =
+                            fixNumber(
+                                pageData[csvConfig.GOOGLE.columns.AMOUNT]
+                            );
+                        [
+                            csvConfig.GOOGLE.columns.SPENDING,
+                            csvConfig.GOOGLE.columns.TEXT,
+                            csvConfig.GOOGLE.columns.IMAGE,
+                            csvConfig.GOOGLE.columns.VIDEO,
+                        ].forEach((col) => {
+                            pd.googleAds[index][col] =
+                                fixNumber(pageData[col]) * VAT;
+                        });
                     });
                     break;
                 }
@@ -201,6 +215,14 @@ export const AdsDataProvider = function ({ children }) {
     const candidateAdsData = (name) =>
         sheetsData.loaded ? sheetsData.candidates[name] ?? false : null;
 
+    const findCandidateForGoogleAccount = (accountId) => {
+        const found = Object.entries(sheetsData.candidates).find(
+            ([, candidate]) =>
+                candidate[csvConfig.ACCOUNTS.columns.GOOGLE].includes(accountId)
+        );
+        return found ? found[0] : null;
+    };
+
     const findCandidateForMetaAccount = (accountId) => {
         const found = Object.entries(sheetsData.candidates).find(
             ([, candidate]) =>
@@ -219,6 +241,7 @@ export const AdsDataProvider = function ({ children }) {
             mergedWeeksData: mergedWeeksData(),
             allCandidatesNames,
             candidateAdsData,
+            findCandidateForGoogleAccount,
             findCandidateForMetaAccount,
         }),
         [sheetsData, metaApiData]

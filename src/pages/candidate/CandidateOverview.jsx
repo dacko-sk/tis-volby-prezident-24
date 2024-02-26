@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import { useOutletContext } from 'react-router-dom';
 
 import { setTitle } from '../../helpers/browser';
-import { colors } from '../../helpers/constants';
+import { chartKeys, columnVariants } from '../../helpers/charts';
 import { labels, t } from '../../helpers/dictionary';
 import { routes, segments } from '../../helpers/routes';
 import { wpCat } from '../../helpers/wp';
@@ -31,29 +31,16 @@ function CandidateOverview() {
                 <Row className="my-4">
                     <Col lg={6}>
                         <TisBarChart
-                            bars={[
-                                {
-                                    key: agk.outgoing,
-                                    name: labels.charts.outgoing,
-                                    color: colors.colorOrange,
-                                    stackId: 'finance',
-                                },
-                                {
-                                    key: agk.incoming,
-                                    name: labels.charts.incoming,
-                                    color: colors.colorDarkBlue,
-                                    stackId: 'finance',
-                                },
-                            ]}
+                            bars={columnVariants.inOutStacked}
                             data={[
                                 {
                                     name: t(labels.charts.outgoing),
-                                    [agk.outgoing]:
+                                    [chartKeys.OUTGOING]:
                                         candidate.account?.[agk.outgoing] ?? 0,
                                 },
                                 {
                                     name: t(labels.charts.incoming),
-                                    [agk.incoming]:
+                                    [chartKeys.INCOMING]:
                                         candidate.account?.[agk.incoming] ?? 0,
                                 },
                             ]}
