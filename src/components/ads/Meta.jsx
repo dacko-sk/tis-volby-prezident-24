@@ -63,10 +63,10 @@ function Meta({
                 if (!(spendingAggr[candidate] ?? false)) {
                     spendingAggr[candidate] = {
                         name: candidateChartLabel(candidate, segments.ONLINE),
-                        [chartKeys.SPENDING]: 0,
+                        [chartKeys.OUTGOING]: 0,
                     };
                 }
-                spendingAggr[candidate][chartKeys.SPENDING] +=
+                spendingAggr[candidate][chartKeys.OUTGOING] +=
                     pageProps.outgoing;
             }
         });
@@ -310,7 +310,7 @@ function Meta({
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(
-                    sortByNumericProp(chartKeys.SPENDING)
+                    sortByNumericProp(chartKeys.OUTGOING)
                 )}
                 subtitle={t(labels.ads.meta.spending.disclaimer)}
                 timestamp={sheetsData.lastUpdateFb}

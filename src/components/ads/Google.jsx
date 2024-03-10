@@ -63,10 +63,10 @@ function Google({
                 if (!(spendingAggr[candidate] ?? false)) {
                     spendingAggr[candidate] = {
                         name: chartLabel,
-                        [chartKeys.SPENDING]: 0,
+                        [chartKeys.OUTGOING]: 0,
                     };
                 }
-                spendingAggr[candidate][chartKeys.SPENDING] += spending;
+                spendingAggr[candidate][chartKeys.OUTGOING] += spending;
 
                 const amount = pageData[csvConfig.GOOGLE.columns.AMOUNT];
                 totalAmount += amount;
@@ -107,7 +107,7 @@ function Google({
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(
-                    sortByNumericProp(chartKeys.SPENDING)
+                    sortByNumericProp(chartKeys.OUTGOING)
                 )}
                 subtitle={t(labels.ads.google.spending.disclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
