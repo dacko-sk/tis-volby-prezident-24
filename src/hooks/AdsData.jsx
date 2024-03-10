@@ -98,7 +98,11 @@ export const processDataSheets = (data) => {
                                           .split(',')
                                     : [],
                             [csvConfig.ACCOUNTS.columns.WP]:
-                                row[csvConfig.ACCOUNTS.columns.WP] ?? null,
+                                row[csvConfig.ACCOUNTS.columns.WP] ?? false
+                                    ? fixNumber(
+                                          row[csvConfig.ACCOUNTS.columns.WP]
+                                      )
+                                    : null,
                         };
                     });
                     break;
@@ -231,6 +235,14 @@ export const AdsDataProvider = function ({ children }) {
         return found ? found[0] : null;
     };
 
+    const findCandidateByWpTags = (tags) => {
+        const found = Object.entries(sheetsData.candidates).find(
+            ([, candidate]) =>
+                tags.includes(candidate[csvConfig.ACCOUNTS.columns.WP])
+        );
+        return found ? found[0] : null;
+    };
+
     const value = useMemo(
         () => ({
             sheetsData,
@@ -243,6 +255,7 @@ export const AdsDataProvider = function ({ children }) {
             candidateAdsData,
             findCandidateForGoogleAccount,
             findCandidateForMetaAccount,
+            findCandidateByWpTags,
         }),
         [sheetsData, metaApiData]
     );

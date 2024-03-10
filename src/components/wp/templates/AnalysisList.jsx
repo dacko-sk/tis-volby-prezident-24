@@ -10,7 +10,8 @@ import {
     transparencyClass,
 } from '../../../helpers/wp';
 
-// import useAccountsData from '../../../hooks/AccountsData';
+import useAdsData from '../../../hooks/AdsData';
+import { candidateImage } from '../../../helpers/constants';
 
 function AnalysisList({ article, clickHandler, keyUpHandler }) {
     const { analysis } = article;
@@ -23,19 +24,8 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
     }
     const cls = transparencyClass(analysis.lastScore);
 
-    // const { findPartyByWpTags } = useAccountsData();
-    // const party = findPartyByWpTags(article.tags);
-    const logo = /* party && (party.logo ?? false) ? (
-            <img
-                alt={t(labels.analysis.transparency[cls])}
-                className="p-3"
-                src={party.logo}
-            />
-        ) : */ null;
-    const name =
-        /* party && (party.fullName ?? false)
-            ? party.fullName
-            : */ article.title.rendered;
+    const { findCandidateByWpTags } = useAdsData();
+    const candidate = findCandidateByWpTags(article.tags);
 
     return (
         <Col md={12}>
@@ -56,12 +46,15 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                             )}
                         >
                             <figure className="text-center text-xxl-start">
-                                {logo}
+                                <img
+                                    src={candidateImage(candidate)}
+                                    alt={candidate}
+                                />
                             </figure>
                         </div>
                     </Col>
                     <Col>
-                        <h2>{name}</h2>
+                        <h2>{candidate}</h2>
                         <Table responsive>
                             <tbody>
                                 <tr>

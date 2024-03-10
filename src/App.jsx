@@ -15,6 +15,7 @@ import Layout from './Layout';
 import Analyses from './pages/Analyses';
 import Article from './pages/Article';
 import Candidate from './pages/Candidate';
+import CandidateAnalysis from './pages/candidate/CandidateAnalysis';
 import CandidateNews from './pages/candidate/CandidateNews';
 import CandidateOnline from './pages/candidate/CandidateOnline';
 import CandidateOverview from './pages/candidate/CandidateOverview';
@@ -48,6 +49,7 @@ function App() {
                                     Candidate,
                                     [
                                         ['', CandidateOverview],
+                                        [segments.ANALYSIS, CandidateAnalysis],
                                         [segments.NEWS, CandidateNews],
                                         [segments.ONLINE, CandidateOnline],
                                         [

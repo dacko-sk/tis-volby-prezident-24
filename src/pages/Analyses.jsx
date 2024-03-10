@@ -16,19 +16,9 @@ function Analyses() {
         [languages.sk]: (
             <>
                 <AlertWithIcon className="my-4" variant="primary">
-                    Tlačová správa k prvému hodnoteniu transparentnosti kampaní:{' '}
+                    Tlačová správa k hodnoteniu transparentnosti kampaní:{' '}
                     <Link to={resources.pressRelease}>
                         Len štyri predvolebné kampane sú transparentné
-                    </Link>
-                    .
-                </AlertWithIcon>
-
-                <AlertWithIcon className="my-4" variant="primary">
-                    Tlačová správa k druhému hodnoteniu transparentnosti
-                    kampaní:{' '}
-                    <Link to={resources.pressRelease2}>
-                        Víťazi posledných volieb vedú najmenej transparentné
-                        kampane
                     </Link>
                     .
                 </AlertWithIcon>
@@ -113,18 +103,9 @@ function Analyses() {
         [languages.en]: (
             <>
                 <AlertWithIcon className="my-4" variant="primary">
-                    First assessment press release (Slovak only):{' '}
+                    Assessment press release (Slovak only):{' '}
                     <Link to={resources.pressRelease}>
                         Len štyri predvolebné kampane sú transparentné
-                    </Link>
-                    .
-                </AlertWithIcon>
-
-                <AlertWithIcon className="my-4" variant="primary">
-                    Second assessment press release (Slovak only):{' '}
-                    <Link to={resources.pressRelease2}>
-                        Víťazi posledných volieb vedú najmenej transparentné
-                        kampane
                     </Link>
                     .
                 </AlertWithIcon>

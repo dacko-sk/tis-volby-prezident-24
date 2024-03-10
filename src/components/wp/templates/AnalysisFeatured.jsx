@@ -3,8 +3,8 @@ import Col from 'react-bootstrap/Col';
 import { badgePctFormat } from '../../../helpers/helpers';
 import { transparencyClass } from '../../../helpers/wp';
 
-// import useAccountsData from '../../../hooks/AccountsData';
-import Media from '../Media';
+import useAdsData from '../../../hooks/AdsData';
+import { candidateImage } from '../../../helpers/constants';
 
 function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     const { analysis } = article;
@@ -17,13 +17,8 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     }
     const cls = transparencyClass(analysis.lastScore);
 
-    // const { findPartyByWpTags } = useAccountsData();
-    // const party = findPartyByWpTags(article.tags);
-    const logo = /* party && (party.logo ?? false) ? party.logo : */ null;
-    const name =
-        /* party && (party.fullName ?? false)
-            ? party.fbName
-            : */ article.title.rendered;
+    const { findCandidateByWpTags } = useAdsData();
+    const candidate = findCandidateByWpTags(article.tags);
 
     return (
         <Col>
@@ -40,15 +35,11 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
                     data-label={badgePctFormat(analysis.lastScore)}
                 >
                     <figure className="text-center">
-                        <Media
-                            alt={article.title.rendered}
-                            id={article.featured_media}
-                            fallback={logo}
-                        />
+                        <img src={candidateImage(candidate)} alt={candidate} />
                     </figure>
 
                     <div className="name text-center">
-                        <span className="badge">{name}</span>
+                        <span className="badge">{candidate}</span>
                     </div>
                 </div>
             </div>

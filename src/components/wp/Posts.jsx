@@ -7,8 +7,10 @@ import Row from 'react-bootstrap/Row';
 
 import { scrollToTop } from '../../helpers/browser';
 import { labels, t } from '../../helpers/dictionary';
-import { routes } from '../../helpers/routes';
+import { routes, segments } from '../../helpers/routes';
 import { getAnalysedData, processArticles, wpCat } from '../../helpers/wp';
+
+import useAdsData from '../../hooks/AdsData';
 
 import AnalysisFeatured from './templates/AnalysisFeatured';
 import AnalysisList from './templates/AnalysisList';
@@ -39,6 +41,7 @@ function Posts({
     const [totalPages, setTotalPages] = useState(0);
     const [activePage, setActivePage] = useState(1);
     const navigate = useNavigate();
+    const { findCandidateByWpTags } = useAdsData();
 
     const isAnalysis =
         categories.includes(wpCat.analyses) ||
@@ -73,7 +76,14 @@ function Posts({
     );
 
     const navigateToArticle = (article) => {
-        navigate(routes.article(article.slug), {
+        let route = routes.article(article.slug);
+        if (isAnalysis && (article.analysis ?? false)) {
+            const candidate = findCandidateByWpTags(article.tags);
+            if (candidate) {
+                route = routes.candidate(candidate, segments.ANALYSIS);
+            }
+        }
+        navigate(route, {
             state: { article },
         });
     };
