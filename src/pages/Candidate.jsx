@@ -50,14 +50,14 @@ function Candidate() {
                             {t(labels.candidates.funding)}
                         </Nav.Link>
                     )}
-                    {/* {(candidate.hasWp) && (
+                    {candidate.hasWp && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.candidate(name, segments.ANALYSIS)}
                         >
                             {t(labels.analysis.navTitle)}
                         </Nav.Link>
-                    )} */}
+                    )}
                     <Nav.Link
                         as={NavLink}
                         to={routes.candidate(name, segments.ONLINE)}

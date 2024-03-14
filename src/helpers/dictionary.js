@@ -263,7 +263,7 @@ export const labels = {
             'Hodnotenie transparentnosti kampaní',
             'Assessment of campaigns transparency',
         ],
-        top: ['Top %i hodnotených kampaní', 'Top %i rated campaigns'],
+        top: ['%i hodnotených kampaní', '%i evaluated campaigns'],
         showAll: ['Zobraziť všetky hodnotenia', 'Show all assessments'],
     },
     analysis: {
@@ -274,6 +274,10 @@ export const labels = {
         badges: [
             ['nezistené/netýka sa', 'áno', 'čiastočne', 'nie'],
             ['N/A', 'yes', 'partially', 'no'],
+        ],
+        disclaimer: [
+            'Do hodnotenia transparentnosti prezidentských kandidátov bolo zaradených šesť kampaní, ktorých celkové výdavky ku dňu hodnotenia (12.3.) prekročili minimálnu hranicu 20-tisíc eur. Kampane zvyšných piatich kandidátov nebolo možné kvôli ich nízkej intenzite adekvátne zhodnotiť a porovnať.',
+            'We evaluated 6 campaigns whose total expenses by the date of evaluation (March 12th) exceeded € 20,000. We were not able to evaluate campaigns of the remaining 5 candidates properly due to low intensity.',
         ],
         history: ['História hodnotení', 'Assessments history'],
         indicators: {
@@ -314,8 +318,8 @@ export const labels = {
                 },
                 {
                     name: [
-                        'Identifikácia bilboardovej kampane',
-                        'Identification of the Billboard Campaign',
+                        'Identifikácia outdoorovej kampane',
+                        'Identification of the Outdoor Campaign',
                     ],
                     desc: [
                         'Na transparentnom účte je možné identifikovať výdavky na outdoorovú kampaň kandidáta, minimálne v rozsahu mesačných výdavkov na tento typ reklamy.',
@@ -337,7 +341,7 @@ export const labels = {
                 {
                     name: ['Miera diverzifikácie kampane', 'Campaign dversity'],
                     desc: [
-                        'Množstvo darcov, na ktorých je kampaň kandidáta postavená.',
+                        'Množstvo identifikovateľných darcov, na ktorých je kampaň kandidáta postavená.',
                         'The regular election campaign relies on diverse funding sources, including activating supporters through small donations.',
                     ],
                 },
@@ -347,7 +351,7 @@ export const labels = {
                         'Dependence on major donors',
                     ],
                     desc: [
-                        'Miera závislosti kampane od veľkých darcov (dary nad 10-tisíc eur).',
+                        'Miera závislosti kampane od veľkých identifikovateľných darcov (dary nad 10-tisíc eur).',
                         'Dependence on major donors (donations above 10,000 EUR).',
                     ],
                 },
@@ -397,7 +401,7 @@ export const labels = {
                         'Communication with Voters',
                     ],
                     desc: [
-                        'Mystery test responzívnosti kandidáta a jeho tímu.',
+                        'Mystery test responzívnosti kandidáta a jeho tímu. Občianska otázka cez e-mail: "Vzhľadom na to, že som nenašla harmonogram podujatí v rámci prezidentskej kampane by som sa rada opýtala, či budete mať v najbližšej dobe, pred voľbami, nejaké osobné stretnutie s občanmi, v Bratislave, kde by bola možnosť bližšie spoznať Vás a Váš predvolebný program." Občianska otázka cez FB: "Dobrý deň, rada by som sa opýtala, či v prípade zvolenia v prezidentských voľbách budete mať vyhradený pravidelný termín na stretávanie sa s občanmi?"',
                         `Mystery test of candidate's response to potential Voters questions.`,
                     ],
                 },

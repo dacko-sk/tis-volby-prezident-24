@@ -3,14 +3,13 @@ import Row from 'react-bootstrap/Row';
 
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
-// import { routes } from '../helpers/routes';
+import { routes } from '../helpers/routes';
 import { wpCat } from '../helpers/wp';
 
 import Top10 from '../components/accounts/Top10';
 import TotalSpending from '../components/accounts/TotalSpending';
 import Top10Ads from '../components/ads/Top10Ads';
 import TotalAdsSpending from '../components/ads/TotalAdsSpending';
-// import CandidatesGallery from '../components/candidates/CandidatesGallery';
 import DonateButton from '../components/general/DonateButton';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
 import Title from '../components/structure/Title';
@@ -43,14 +42,12 @@ function Home() {
                 <DonateButton long xl />
             </div>
 
-            {/* <CandidatesGallery /> */}
-
-            {/* <Posts
+            <Posts
                 categories={[wpCat.featured]}
                 showMore={t(labels.analyses.showAll)}
                 showMoreLink={routes.analyses()}
                 template={templates.featured}
-            /> */}
+            />
 
             <TotalAdsSpending />
             <Top10Ads />

@@ -15,6 +15,7 @@ import {
     transparencyIndicators as ati,
 } from '../../../helpers/wp';
 
+import AlertWithIcon from '../../general/AlertWithIcon';
 import IconTooltip from '../../general/IconTooltip';
 
 function AnalysisDetail({ article }) {
@@ -204,6 +205,10 @@ function AnalysisDetail({ article }) {
                     </Row>
                 </div>
             </div>
+
+            <AlertWithIcon className="my-4" variant="primary">
+                {t(labels.analysis.disclaimer)}
+            </AlertWithIcon>
 
             {historyTable}
 

@@ -120,14 +120,9 @@ export const processArticles = (data) =>
  * Analysis helpers
  */
 export const resources = {
-    methodology: routes.article(
-        'ako-sme-hodnotili-transparentnost-kampani-pred-parlamentnymi-volbami-2023'
-    ),
+    methodology: routes.article('metodika-hodnotenia-kampani'),
     pressRelease: routes.article(
-        'len-styri-predvolebne-kampane-su-transparentne'
-    ),
-    pressRelease2: routes.article(
-        'vitazi-poslednych-volieb-vedu-najmenej-transparentne-kampane'
+        'najmenej-transparentnu-kampan-vedie-peter-pellegrini'
     ),
 };
 
