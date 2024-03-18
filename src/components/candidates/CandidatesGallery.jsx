@@ -73,8 +73,19 @@ function CandidatesGallery() {
                                                 />
                                             </figure>
 
-                                            <div className="name text-center">
-                                                <span className="badge">
+                                            <div className="cover text-center">
+                                                {candidate.hasInfo && (
+                                                    <span className="info text-white">
+                                                        {
+                                                            t(
+                                                                labels
+                                                                    .candidates
+                                                                    .info
+                                                            )[candidate.infoKey]
+                                                        }
+                                                    </span>
+                                                )}
+                                                <span className="text-white fw-bold">
                                                     {candidate.name}
                                                 </span>
                                             </div>

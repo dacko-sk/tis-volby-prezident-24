@@ -9,6 +9,7 @@ import { decodeSlug, routes, segments } from '../helpers/routes';
 import useAccountsData from '../hooks/AccountsData';
 import useAdsData from '../hooks/AdsData';
 
+import AlertWithIcon from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
 
 function Candidate() {
@@ -37,6 +38,11 @@ function Candidate() {
     return (
         <section className="party-page">
             <Title secondaryWords={1}>{name}</Title>
+            {candidate.hasInfo && (
+                <AlertWithIcon className="my-4" variant="primary">
+                    {t(labels.candidates.info)[candidate.infoKey]}
+                </AlertWithIcon>
+            )}
             <div className="tabs-scrollable">
                 <Nav variant="tabs">
                     <Nav.Link as={NavLink} to={routes.candidate(name)} end>

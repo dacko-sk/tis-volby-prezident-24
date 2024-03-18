@@ -11,6 +11,7 @@ export const csvConfig = {
             FB: 'FB Účty',
             GOOGLE: 'Google účty',
             WP: 'WP tag',
+            INFO: 'Info',
         },
         name: 'účty',
     },
@@ -103,6 +104,13 @@ export const processDataSheets = (data) => {
                                           row[csvConfig.ACCOUNTS.columns.WP]
                                       )
                                     : null,
+                            [csvConfig.ACCOUNTS.columns.INFO]: row[
+                                csvConfig.ACCOUNTS.columns.INFO
+                            ]?.length
+                                ? fixNumber(
+                                      row[csvConfig.ACCOUNTS.columns.INFO]
+                                  )
+                                : null,
                         };
                     });
                     break;

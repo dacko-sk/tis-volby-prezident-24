@@ -459,6 +459,14 @@ export const labels = {
     },
     candidates: {
         assets: ['Majetkové priznania', 'Assets'],
+        info: [
+            ['kandidát odstúpil', 'postúpil do 2. kola', 'víťaz volieb'],
+            [
+                'candidate resigned',
+                'advanced to the 2nd round',
+                'elections winner',
+            ],
+        ],
         funding: ['Financovanie', 'Financing'],
         monitoring: [
             'Monitorujeme týchto kandidátov',

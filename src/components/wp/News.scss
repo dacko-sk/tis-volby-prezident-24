@@ -11,6 +11,8 @@
   }
 }
 
+$border-width: 2px;
+$fade: 0.3;
 .article {
   cursor: pointer;
   p:last-child {
@@ -50,16 +52,10 @@
         white-space: normal;
       }
     }
-    .name {
-      position: absolute;
-      bottom: 0.75em;
-      padding: 0 1em;
-      width: 100%;
-    }
     figure {
       border-color: $tis-score-unknown;
       border-style: dotted;
-      border-width: 2px;
+      border-width: $border-width;
       position: absolute;
       top: 0;
       left: 0;
@@ -72,6 +68,11 @@
       transform: translateY(-50%);
       filter: saturate(25%);
     }
+    .cover {
+      bottom: $border-width;
+      padding: 0 $border-width;
+    }
+
     &.score-good {
       .thumb:after {
         background-color: $tis-score-green;
@@ -134,6 +135,24 @@
         text-align: center;
         width: 150%;
       }
+    }
+  }
+}
+
+.cover {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  span {
+    background-color: fade-out(black, $fade);
+    border-radius: 0;
+    display: inline-block;
+    line-height: 1.5em;
+    padding: 0.35em;
+    width: 100%;
+    white-space: normal;
+    &.info {
+      background-color: fade-out($tis-orange-ds, $fade);
     }
   }
 }
@@ -216,6 +235,16 @@ ul.blocks-gallery-grid {
     font-size: 2em;
     line-height: 2.65rem;
   }
+  .analysis-preview .cover {
+    font-size: 1.25em;
+    padding: 0.4em 1em;
+    .articles.featured & {
+      font-size: 1.5em;
+    }
+    .articles.list & {
+      font-size: 1.1em;
+    }
+  }
 }
 
 @media (min-width: map.get($grid-breakpoints, 'xl')) {
@@ -247,5 +276,11 @@ ul.blocks-gallery-grid {
   }
   .analysis-preview th {
     width: 25%;
+  }
+  .analysis-preview .cover {
+    font-size: 1.5em;
+    .articles.featured & {
+      font-size: 2em;
+    }
   }
 }

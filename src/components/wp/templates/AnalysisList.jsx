@@ -11,7 +11,7 @@ import {
 } from '../../../helpers/wp';
 
 import useAdsData from '../../../hooks/AdsData';
-import { candidateImage } from '../../../helpers/constants';
+import { candidateData } from '../../../helpers/constants';
 
 function AnalysisList({ article, clickHandler, keyUpHandler }) {
     const { analysis } = article;
@@ -24,8 +24,10 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
     }
     const cls = transparencyClass(analysis.lastScore);
 
-    const { findCandidateByWpTags } = useAdsData();
-    const candidate = findCandidateByWpTags(article.tags);
+    const { candidateAdsData, findCandidateByWpTags } = useAdsData();
+    const name = findCandidateByWpTags(article.tags);
+    const adsData = candidateAdsData(name);
+    const candidate = candidateData(name, null, adsData);
 
     return (
         <Col md={12}>
@@ -46,15 +48,23 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                             )}
                         >
                             <figure className="text-center text-xxl-start">
-                                <img
-                                    src={candidateImage(candidate)}
-                                    alt={candidate}
-                                />
+                                <img src={candidate.image} alt={name} />
                             </figure>
+                            <div className="cover text-center">
+                                {candidate.hasInfo && (
+                                    <span className="info text-white">
+                                        {
+                                            t(labels.candidates.info)[
+                                                candidate.infoKey
+                                            ]
+                                        }
+                                    </span>
+                                )}
+                            </div>
                         </div>
                     </Col>
                     <Col>
-                        <h2>{candidate}</h2>
+                        <h2>{name}</h2>
                         <Table responsive>
                             <tbody>
                                 <tr>

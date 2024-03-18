@@ -1,10 +1,11 @@
 import Col from 'react-bootstrap/Col';
 
+import { candidateData } from '../../../helpers/constants';
 import { badgePctFormat } from '../../../helpers/helpers';
 import { transparencyClass } from '../../../helpers/wp';
 
 import useAdsData from '../../../hooks/AdsData';
-import { candidateImage } from '../../../helpers/constants';
+import { labels, t } from '../../../helpers/dictionary';
 
 function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     const { analysis } = article;
@@ -17,8 +18,10 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     }
     const cls = transparencyClass(analysis.lastScore);
 
-    const { findCandidateByWpTags } = useAdsData();
-    const candidate = findCandidateByWpTags(article.tags);
+    const { candidateAdsData, findCandidateByWpTags } = useAdsData();
+    const name = findCandidateByWpTags(article.tags);
+    const adsData = candidateAdsData(name);
+    const candidate = candidateData(name, null, adsData);
 
     return (
         <Col>
@@ -35,11 +38,16 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
                     data-label={badgePctFormat(analysis.lastScore)}
                 >
                     <figure className="text-center">
-                        <img src={candidateImage(candidate)} alt={candidate} />
+                        <img src={candidate.image} alt={candidate} />
                     </figure>
 
-                    <div className="name text-center">
-                        <span className="badge">{candidate}</span>
+                    <div className="cover text-center">
+                        {candidate.hasInfo && (
+                            <span className="info text-white">
+                                {t(labels.candidates.info)[candidate.infoKey]}
+                            </span>
+                        )}
+                        <span className="text-white fw-bold">{name}</span>
                     </div>
                 </div>
             </div>

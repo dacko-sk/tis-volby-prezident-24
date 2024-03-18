@@ -35,8 +35,8 @@ function CandidateAnalysis() {
             ).then((response) => response.json()),
         {
             // run only if article data were not delivered via location.state
-            // and only if party has WP tag
-            enabled: !(article.title ?? false) && candidate.hasWp,
+            // and only if candidate has WP tag
+            enabled: !(article.title ?? false) && !!candidate.hasWp,
         }
     );
 
