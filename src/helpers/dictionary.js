@@ -539,9 +539,12 @@ export const labels = {
         [el.n23]: ['Parlamentné\nvoľby 2023', 'Parliamentary\nelections 2023'],
         [el.e24]: ['Európske\nvoľby 2024', 'European\nelections 2024'],
         account: ['Transparentný účet', 'Transparent account'],
-        date: ['Dátum konania volieb', 'Elections date'],
+        date: ['Dátum konania 2. kola volieb', 'Date of elections 2nd round'],
         over: ['Voľby sa skončili', 'Elections ended'],
-        timeTillstart: ['Zostávajúci čas do volieb', 'Time to elections start'],
+        timeTillstart: [
+            'Zostávajúci čas do 2. kola volieb',
+            'Time to elections 2nd round start',
+        ],
         timeTillend: [
             'Zostávajúci čas do konca volieb',
             'Time to elections end',

@@ -27,8 +27,8 @@ function Home() {
             <Row className="gy-3 gy-lg-0 text-center mb-4">
                 <Col lg={6}>
                     <ElectionsCountdown
-                        start="2024-03-23T07:00:00"
-                        end="2024-03-23T22:00:00"
+                        start="2024-04-06T07:00:00"
+                        end="2024-04-06T22:00:00"
                     />
                 </Col>
                 <Col lg={6}>
