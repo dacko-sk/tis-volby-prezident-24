@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useNavigate } from 'react-router-dom';
 
 import { candidateData } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
@@ -13,22 +13,9 @@ import Loading from '../general/Loading';
 import { sortBySurname } from '../../helpers/helpers';
 
 function CandidatesGallery() {
-    const navigate = useNavigate();
-
     const { allTransparentCandidatesNames, candidateAccountData } =
         useAccountsData();
     const { allCandidatesNames, candidateAdsData } = useAdsData();
-
-    const getClickHandler = (name) => (event) => {
-        if (event.target.tagName.toLowerCase() !== 'a') {
-            navigate(routes.candidate(name));
-        }
-    };
-    const getKeyUpHandler = (name) => (event) => {
-        if (event.keyCode === 13) {
-            navigate(routes.candidate(name));
-        }
-    };
 
     const transparentCandidates = allTransparentCandidatesNames();
     const gsCandidates = allCandidatesNames();
@@ -54,16 +41,9 @@ function CandidatesGallery() {
                             );
                             return (
                                 <Col xs={6} md={3} key={candidate.name}>
-                                    <div
+                                    <Link
                                         className="article analysis-preview"
-                                        onClick={getClickHandler(
-                                            candidate.name
-                                        )}
-                                        onKeyUp={getKeyUpHandler(
-                                            candidate.name
-                                        )}
-                                        role="link"
-                                        tabIndex={0}
+                                        to={routes.candidate(candidate.name)}
                                     >
                                         <div className="thumb">
                                             <figure className="text-center">
@@ -90,7 +70,7 @@ function CandidatesGallery() {
                                                 </span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </Col>
                             );
                         })}

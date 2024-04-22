@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
 import { labels, t } from '../../../helpers/dictionary';
 import { badgePctFormat } from '../../../helpers/helpers';
+import { routes, segments } from '../../../helpers/routes';
 import {
     baseData as abd,
     metaData as amd,
@@ -13,7 +15,7 @@ import {
 import useAdsData from '../../../hooks/AdsData';
 import { candidateData } from '../../../helpers/constants';
 
-function AnalysisList({ article, clickHandler, keyUpHandler }) {
+function AnalysisList({ article }) {
     const { analysis } = article;
     if (analysis.error ?? false) {
         console.log(analysis.error);
@@ -25,19 +27,16 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
     const cls = transparencyClass(analysis.lastScore);
 
     const { candidateAdsData, findCandidateByWpTags } = useAdsData();
-    const name = findCandidateByWpTags(article.tags);
+    const name = findCandidateByWpTags(article.tags) ?? article.title.rendered;
     const adsData = candidateAdsData(name);
     const candidate = candidateData(name, null, adsData);
 
     return (
         <Col md={12}>
-            <div
+            <Link
                 id={article.slug}
                 className={`article hover-bg analysis-preview score-${cls}`}
-                onClick={clickHandler}
-                onKeyUp={keyUpHandler}
-                role="link"
-                tabIndex={0}
+                to={routes.candidate(name, segments.ANALYSIS)}
             >
                 <Row className="align-items-center">
                     <Col sm>
@@ -96,7 +95,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                         </Table>
                     </Col>
                 </Row>
-            </div>
+            </Link>
         </Col>
     );
 }
