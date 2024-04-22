@@ -38,7 +38,7 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
                     data-label={badgePctFormat(analysis.lastScore)}
                 >
                     <figure className="text-center">
-                        <img src={candidate.image} alt={candidate} />
+                        <img src={candidate.image} alt={name} />
                     </figure>
 
                     <div className="cover text-center">
