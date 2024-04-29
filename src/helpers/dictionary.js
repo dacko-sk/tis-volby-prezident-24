@@ -46,6 +46,7 @@ export const labels = {
             [ak.vs]: ['VS', 'Variabile symbol'],
             [ak.ss]: ['ŠS', 'Specific symbol'],
         },
+        title: ['Transparentné účty', 'Transparent accounts'],
         totalDisclaimer: [
             'Súčet výdavkov na transparentných účtoch všetkých kandidátov.',
             'Sum of spendings on accounts of all candidates.',
@@ -459,6 +460,7 @@ export const labels = {
     },
     candidates: {
         assets: ['Majetkové priznania', 'Assets'],
+        campaign: ['Informácie o kampani', 'Campaign details'],
         info: [
             ['kandidát odstúpil', 'postúpil do 2. kola', 'víťaz volieb'],
             [
@@ -478,6 +480,8 @@ export const labels = {
             'No candidate matches the search query.',
         ],
         overview: ['Prehľad', 'Overview'],
+        report: ['Záverečná správa', 'Final report'],
+        reports: ['Záverečné správy', 'Final reports'],
     },
     charts: {
         disclaimer: [

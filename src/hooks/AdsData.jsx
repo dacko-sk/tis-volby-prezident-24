@@ -12,6 +12,7 @@ export const csvConfig = {
             GOOGLE: 'Google účty',
             WP: 'WP tag',
             INFO: 'Info',
+            REPORT: 'Záverečná správa',
         },
         name: 'účty',
     },
@@ -111,6 +112,8 @@ export const processDataSheets = (data) => {
                                       row[csvConfig.ACCOUNTS.columns.INFO]
                                   )
                                 : null,
+                            [csvConfig.ACCOUNTS.columns.REPORT]:
+                                row[csvConfig.ACCOUNTS.columns.REPORT] ?? null,
                         };
                     });
                     break;

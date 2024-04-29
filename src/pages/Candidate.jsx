@@ -78,14 +78,6 @@ function Candidate() {
                             {t(labels.news.navTitle)}
                         </Nav.Link>
                     )}
-                    {/* {(candidate.hasWp) && (
-                        <Nav.Link
-                            as={NavLink}
-                            to={routes.candidate(name, segments.ASSETS)}
-                        >
-                            {t(labels.candidates.assets)}
-                        </Nav.Link>
-                    )} */}
                 </Nav>
             </div>
 

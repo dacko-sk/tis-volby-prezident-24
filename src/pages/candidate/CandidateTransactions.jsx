@@ -11,6 +11,8 @@ import { aggregatedKeys as agk } from '../../hooks/AccountsData';
 
 import AccountTransactions from '../../components/accounts/AccountTransactions';
 
+import linkIcon from '../../../public/img/external_link_icon.svg?url';
+
 function CandidateTransactions() {
     const candidate = useOutletContext();
     const navigate = useNavigate();
@@ -35,6 +37,28 @@ function CandidateTransactions() {
 
             <Table striped bordered responsive hover>
                 <tbody>
+                    <tr>
+                        <td>{t(labels.elections.account)}</td>
+                        <td>
+                            <a
+                                href={candidate.account?.[agk.account]}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <span className="me-2">
+                                    <span className="d-md-none">
+                                        {shortenUrl(
+                                            candidate.account?.[agk.account]
+                                        )}
+                                    </span>
+                                    <span className="d-none d-md-inline">
+                                        {candidate.account?.[agk.account]}
+                                    </span>
+                                </span>
+                                <img className="inline-icon" src={linkIcon} />
+                            </a>
+                        </td>
+                    </tr>
                     <tr>
                         <td>{t(labels.charts.incoming)}</td>
                         <td>
@@ -64,18 +88,6 @@ function CandidateTransactions() {
                     <tr>
                         <td>{t(labels.charts.uniqueDonors)}</td>
                         <td>{candidate.account?.[agk.num_unique_donors]}</td>
-                    </tr>
-                    <tr>
-                        <td>{t(labels.elections.account)}</td>
-                        <td>
-                            <a
-                                href={candidate.account?.[agk.account]}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                {shortenUrl(candidate.account?.[agk.account])}
-                            </a>
-                        </td>
                     </tr>
                 </tbody>
             </Table>

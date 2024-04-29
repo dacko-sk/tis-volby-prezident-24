@@ -1,9 +1,8 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
 import { setTitle } from '../../helpers/browser';
-import { chartKeys, columnVariants } from '../../helpers/charts';
 import { labels, t } from '../../helpers/dictionary';
 import { routes, segments } from '../../helpers/routes';
 import { wpCat } from '../../helpers/wp';
@@ -11,10 +10,11 @@ import { wpCat } from '../../helpers/wp';
 import { aggregatedKeys as agk } from '../../hooks/AccountsData';
 import { csvConfig } from '../../hooks/AdsData';
 
-import TisBarChart from '../../components/charts/TisBarChart';
 import AlertWithIcon from '../../components/general/AlertWithIcon';
 import HeroNumber from '../../components/general/HeroNumber';
 import Posts, { templates } from '../../components/wp/Posts';
+
+import pdfIcon from '../../../public/img/PDF_icon.svg?url';
 
 function CandidateOverview() {
     const candidate = useOutletContext();
@@ -30,24 +30,37 @@ function CandidateOverview() {
             ) : (
                 <Row className="my-4">
                     <Col lg={6}>
-                        <TisBarChart
-                            bars={columnVariants.inOutStacked}
-                            data={[
-                                {
-                                    name: t(labels.charts.outgoing),
-                                    [chartKeys.OUTGOING]:
-                                        candidate.account?.[agk.outgoing] ?? 0,
-                                },
-                                {
-                                    name: t(labels.charts.incoming),
-                                    [chartKeys.INCOMING]:
-                                        candidate.account?.[agk.incoming] ?? 0,
-                                },
-                            ]}
-                            buttonLink={routes.charts}
-                            currency
-                            lastUpdate={false}
-                        />
+                        <h2 className="text-center mb-4">
+                            {t(labels.candidates.campaign)}
+                        </h2>
+                        <div className="mb-4">
+                            <Link
+                                to={routes.candidate(
+                                    candidate.name,
+                                    segments.TRANSACTIONS
+                                )}
+                                className="icon-link"
+                            >
+                                <span>{t(labels.elections.account)}</span>
+                            </Link>
+
+                            {candidate.hasReport && (
+                                <a
+                                    className="icon-link"
+                                    href={
+                                        candidate[
+                                            csvConfig.ACCOUNTS.columns.REPORT
+                                        ]
+                                    }
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    aria-label="download"
+                                >
+                                    <span>{t(labels.candidates.report)}</span>
+                                    <img src={pdfIcon} />
+                                </a>
+                            )}
+                        </div>
                     </Col>
                     <Col lg={6}>
                         <HeroNumber

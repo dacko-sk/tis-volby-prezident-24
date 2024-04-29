@@ -29,6 +29,8 @@ export const candidateData = (name, accountData, adsData) => {
         adsData && !!data[csvConfig.ACCOUNTS.columns.GOOGLE].length;
     data.hasWp = adsData && !!data[csvConfig.ACCOUNTS.columns.WP];
     data.hasInfo = adsData && data[csvConfig.ACCOUNTS.columns.INFO] !== null;
+    data.hasReport =
+        adsData && data[csvConfig.ACCOUNTS.columns.REPORT] !== null;
     data.infoKey = data[csvConfig.ACCOUNTS.columns.INFO] ?? null;
     data.isValid = data.hasAccount || adsData !== false;
 
