@@ -1,6 +1,6 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Link, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 
 import { setTitle } from '../../helpers/browser';
 import { labels, t } from '../../helpers/dictionary';
@@ -11,10 +11,9 @@ import { aggregatedKeys as agk } from '../../hooks/AccountsData';
 import { csvConfig } from '../../hooks/AdsData';
 
 import AlertWithIcon from '../../components/general/AlertWithIcon';
+import DownloadLink from '../../components/general/DownloadLink';
 import HeroNumber from '../../components/general/HeroNumber';
 import Posts, { templates } from '../../components/wp/Posts';
-
-import pdfIcon from '../../../public/img/PDF_icon.svg?url';
 
 function CandidateOverview() {
     const candidate = useOutletContext();
@@ -34,31 +33,25 @@ function CandidateOverview() {
                             {t(labels.candidates.campaign)}
                         </h2>
                         <div className="mb-4">
-                            <Link
+                            <DownloadLink
                                 to={routes.candidate(
                                     candidate.name,
                                     segments.TRANSACTIONS
                                 )}
-                                className="icon-link"
                             >
-                                <span>{t(labels.elections.account)}</span>
-                            </Link>
+                                {t(labels.elections.account)}
+                            </DownloadLink>
 
                             {candidate.hasReport && (
-                                <a
-                                    className="icon-link"
-                                    href={
+                                <DownloadLink
+                                    to={
                                         candidate[
                                             csvConfig.ACCOUNTS.columns.REPORT
                                         ]
                                     }
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    aria-label="download"
                                 >
-                                    <span>{t(labels.candidates.report)}</span>
-                                    <img src={pdfIcon} />
-                                </a>
+                                    {t(labels.candidates.report)}
+                                </DownloadLink>
                             )}
                         </div>
                     </Col>

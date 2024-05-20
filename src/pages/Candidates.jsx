@@ -1,7 +1,10 @@
+import Nav from 'react-bootstrap/Nav';
+import { NavLink, Outlet } from 'react-router-dom';
+
 import { setTitle } from '../helpers/browser';
 import { labels, t } from '../helpers/dictionary';
+import { routes, segments } from '../helpers/routes';
 
-import CandidatesGallery from '../components/candidates/CandidatesGallery';
 import Title from '../components/structure/Title';
 
 function Candidates() {
@@ -11,7 +14,21 @@ function Candidates() {
         <section>
             <Title>{t(labels.candidates.navTitle)}</Title>
 
-            <CandidatesGallery />
+            <div className="tabs-scrollable mb-4">
+                <Nav variant="tabs">
+                    <Nav.Link as={NavLink} to={routes.candidates()} end>
+                        {t(labels.account.title)}
+                    </Nav.Link>
+                    <Nav.Link
+                        as={NavLink}
+                        to={routes.candidates(segments.REPORTS)}
+                    >
+                        {t(labels.candidates.reports)}
+                    </Nav.Link>
+                </Nav>
+            </div>
+
+            <Outlet />
         </section>
     );
 }

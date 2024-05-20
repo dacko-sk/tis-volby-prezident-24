@@ -29,6 +29,7 @@ export const segments = {
     CANDIDATES: 'CANDIDATES',
     NEWS: 'NEWS',
     ONLINE: 'ONLINE',
+    REPORTS: 'REPORTS',
     SEARCH: 'SEARCH',
     TRANSACTIONS: 'TRANSACTIONS',
 };
@@ -41,6 +42,7 @@ export const localSegments = {
         [segments.CANDIDATES]: 'kandidati',
         [segments.NEWS]: 'aktuality',
         [segments.ONLINE]: 'online',
+        [segments.REPORTS]: 'zaverecne-spravy',
         [segments.SEARCH]: 'vyhladavanie',
         [segments.TRANSACTIONS]: 'financovanie',
     },
@@ -51,6 +53,7 @@ export const localSegments = {
         [segments.CANDIDATES]: 'candidates',
         [segments.NEWS]: 'news',
         [segments.ONLINE]: 'online',
+        [segments.REPORTS]: 'reports',
         [segments.SEARCH]: 'search',
         [segments.TRANSACTIONS]: 'financing',
     },
@@ -111,8 +114,10 @@ export const routes = {
               separators.url +
               (slug === true ? ':slug' : slug)
             : ''),
-    candidates: (lang) =>
-        languageRoot(lang) + urlSegment(segments.CANDIDATES, lang),
+    candidates: (subpage, lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.CANDIDATES, lang) +
+        (subpage ? separators.url + urlSegment(subpage, lang) : ''),
     candidate: (slug, subpage, lang) => {
         const niceSlug =
             slug === true

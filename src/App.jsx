@@ -21,6 +21,8 @@ import CandidateOnline from './pages/candidate/CandidateOnline';
 import CandidateOverview from './pages/candidate/CandidateOverview';
 import CandidateTransactions from './pages/candidate/CandidateTransactions';
 import Candidates from './pages/Candidates';
+import CandidatesList from './pages/candidates/CandidatesList';
+import CandidatesReports from './pages/candidates/CandidatesReports';
 import Home from './pages/Home';
 import Online from './pages/Online';
 import News from './pages/News';
@@ -43,7 +45,14 @@ function App() {
                                 [routes.article(true, lang), Article],
                                 [routes.news(lang), News],
                                 [routes.online(lang), Online],
-                                [routes.candidates(lang), Candidates],
+                                [
+                                    routes.candidates('', lang),
+                                    Candidates,
+                                    [
+                                        ['', CandidatesList],
+                                        [segments.REPORTS, CandidatesReports],
+                                    ],
+                                ],
                                 [
                                     routes.candidate(true, '', lang),
                                     Candidate,

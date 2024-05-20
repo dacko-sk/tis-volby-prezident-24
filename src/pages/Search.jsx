@@ -39,7 +39,7 @@ function Search() {
                     to={link}
                     className="d-flex flex-column justify-content-between w-100 cat-local"
                 >
-                    <h3>{name}</h3>
+                    <h3 className="text-capitalize">{name}</h3>
                 </Link>
             </Col>
         );
@@ -56,7 +56,7 @@ function Search() {
                           rel="noreferrer"
                           aria-label="download"
                       >
-                          <h3>
+                          <h3 className="text-capitalize">
                               <span className="me-2">{name}</span>
                               <img className="inline-icon" src={linkIcon} />
                           </h3>
@@ -76,7 +76,7 @@ function Search() {
                     rel="noreferrer"
                     aria-label="download"
                 >
-                    <h3>
+                    <h3 className="text-capitalize">
                         <span className="me-2">{name}</span>
                         <img className="inline-icon" src={pdfIcon} />
                     </h3>
