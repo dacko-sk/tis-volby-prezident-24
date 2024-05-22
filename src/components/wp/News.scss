@@ -38,7 +38,8 @@ a.article {
   &.analysis-preview {
     &:hover,
     &:focus {
-      img {
+      img,
+      svg {
         filter: saturate(100%);
       }
       figure {
@@ -69,7 +70,8 @@ a.article {
       width: 100%;
       height: 100%;
     }
-    img {
+    img,
+    svg {
       position: relative;
       top: 50%;
       transform: translateY(-50%);
@@ -235,7 +237,7 @@ ul.blocks-gallery-grid {
   .analysis-preview th {
     width: calc(100% / 3);
   }
-  .articles.featured .article .thumb:after {
+  .articles.featured a.article .thumb:after {
     font-size: 2em;
     line-height: 2.65rem;
   }
@@ -252,7 +254,7 @@ ul.blocks-gallery-grid {
 }
 
 @media (min-width: map.get($grid-breakpoints, 'xl')) {
-  .articles.featured .article .thumb:after {
+  .articles.featured a.article .thumb:after {
     font-size: 2.5em;
     line-height: 3.15rem;
   }
@@ -274,7 +276,7 @@ ul.blocks-gallery-grid {
       }
     }
   }
-  .articles.featured .article .thumb:after {
+  .articles.featured a.article .thumb:after {
     font-size: 3em;
     line-height: 3.65rem;
   }
