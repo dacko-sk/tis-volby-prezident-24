@@ -57,6 +57,12 @@ export const colors = {
     colorGrey,
 };
 
+export const dates = {
+    electionsStart: '2024-04-06T07:00:00',
+    electionsEnd: '2024-04-06T22:00:00',
+    monitoringEnd: '2024-07-25T07:00:00',
+};
+
 export const elections = {
     e24: 'e24',
     n23: 'n23',

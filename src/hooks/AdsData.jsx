@@ -13,6 +13,8 @@ export const csvConfig = {
             WP: 'WP tag',
             INFO: 'Info',
             REPORT: 'Záverečná správa',
+            CAMPAIGN: 'Kampaň',
+            PRECAMPAIGN: 'Predkampaň',
         },
         name: 'účty',
     },
@@ -114,6 +116,26 @@ export const processDataSheets = (data) => {
                                 : null,
                             [csvConfig.ACCOUNTS.columns.REPORT]:
                                 row[csvConfig.ACCOUNTS.columns.REPORT] ?? null,
+                            [csvConfig.ACCOUNTS.columns.CAMPAIGN]:
+                                row[csvConfig.ACCOUNTS.columns.CAMPAIGN] ??
+                                false
+                                    ? fixNumber(
+                                          row[
+                                              csvConfig.ACCOUNTS.columns
+                                                  .CAMPAIGN
+                                          ]
+                                      )
+                                    : 0,
+                            [csvConfig.ACCOUNTS.columns.PRECAMPAIGN]:
+                                row[csvConfig.ACCOUNTS.columns.PRECAMPAIGN] ??
+                                false
+                                    ? fixNumber(
+                                          row[
+                                              csvConfig.ACCOUNTS.columns
+                                                  .PRECAMPAIGN
+                                          ]
+                                      )
+                                    : 0,
                         };
                     });
                     break;

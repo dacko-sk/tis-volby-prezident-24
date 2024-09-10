@@ -27,6 +27,10 @@ export const labels = {
         ],
         download: ['Stiahnuť ako CSV', 'Download as CSV'],
         expensesAmount: ['Počet výdavkov', 'Number of expenses'],
+        finalReportDisclaimer: [
+            'Súčet výdavkov všetkých kandidátov podľa záverečných správ.',
+            'Sum of spendings of all candidates.',
+        ],
         incomesAmount: ['Počet príjmov', 'Number of incomes'],
         info: ['Informácie o kampani', 'Campaign details'],
         noData: [
@@ -484,6 +488,8 @@ export const labels = {
         reports: ['Záverečné správy', 'Final reports'],
     },
     charts: {
+        amount: ['Suma', 'Amount'],
+        campaign: ['Kampaň', 'Campaign'],
         disclaimer: [
             'Grafy obsahujú dáta z transparentných účtov, očistené o vrátené platby.',
             'Graphs contains data from transparent accounts net of return payments.',
@@ -492,9 +498,19 @@ export const labels = {
             'Po kliknutí na meno kandidáta sa rozbalia podrobnosti.',
             'Click the candidate name for details.',
         ],
-        amount: ['Suma', 'Amount'],
+        finalReport: {
+            disclaimer: [
+                'Grafy obsahujú dáta zo záverečných správ kandidátov.',
+                'Graphs contains data from candidates final reports.',
+            ],
+            title: [
+                'Top 10 kampaní podľa záverečných správ',
+                'Top 10 campaigns by final reports',
+            ],
+        },
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
+        precampaign: ['Predkampaň', 'Precampaign'],
         sum: ['Spolu', 'Total'],
         top10: [
             'Top 10 kampaní podľa výdavkov a príjmov',
