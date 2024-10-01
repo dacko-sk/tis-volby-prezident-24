@@ -1,4 +1,4 @@
-import { dates } from '../../helpers/constants';
+import { dates, finalReports } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
 import {
     candidateChartLabel,
@@ -15,8 +15,8 @@ import useAdsData, { csvConfig } from '../../hooks/AdsData';
 
 import TisBarChart from '../charts/TisBarChart';
 
-function Top10({ finalReport = false, maxItems = 10 }) {
-    if (finalReport) {
+function Top10({ maxItems = 10 }) {
+    if (finalReports) {
         const { allCandidatesNames, candidateAdsData } = useAdsData();
 
         const columns = (allCandidatesNames() ?? []).map((name) => {
