@@ -5,7 +5,10 @@ import {
     chartKeys,
     columnVariants,
 } from '../../helpers/charts';
-import { getTimeFromDate, sortByNumericProp } from '../../helpers/helpers';
+import {
+    getTimestampFromIsoDate,
+    sortByNumericProp,
+} from '../../helpers/helpers';
 import { routes } from '../../helpers/routes';
 
 import useAccountsData, {
@@ -46,7 +49,7 @@ function Top10({ maxItems = 10 }) {
                     labels.charts.disclaimerClick
                 )}`}
                 title={t(labels.charts.finalReport.title)}
-                timestamp={getTimeFromDate(dates.monitoringEnd)}
+                timestamp={getTimestampFromIsoDate(dates.monitoringEnd)}
                 vertical
             />
         );

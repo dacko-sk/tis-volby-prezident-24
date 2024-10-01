@@ -1,6 +1,6 @@
 import { dates, finalReports } from '../../helpers/constants';
 import { labels, t } from '../../helpers/dictionary';
-import { getTimeFromDate } from '../../helpers/helpers';
+import { getTimestampFromIsoDate } from '../../helpers/helpers';
 
 import useAccountsData, {
     aggregatedKeys as agk,
@@ -27,7 +27,7 @@ function TotalSpending() {
         return (
             <HeroNumber
                 disclaimer={t(labels.account.finalReportDisclaimer)}
-                lastUpdate={getTimeFromDate(dates.monitoringEnd)}
+                lastUpdate={getTimestampFromIsoDate(dates.monitoringEnd)}
                 loading={!sheetsData.loaded}
                 number={total}
                 title={t(labels.account.totalSpending)}
