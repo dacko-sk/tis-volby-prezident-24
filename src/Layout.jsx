@@ -10,7 +10,6 @@ import Footer from './components/structure/Footer';
 import DonateBanner from './components/general/DonateBanner';
 // import DonateModal from './components/general/DonateModal';
 
-import useAccountsData from './hooks/AccountsData';
 import useAdsData, {
     loadingErrorMetaApi,
     loadingErrorSheets,
@@ -22,13 +21,7 @@ import useAdsData, {
 
 function Layout() {
     const { pathname } = useLocation();
-    const { loadAccountsData } = useAccountsData();
     const { metaApiData, setMetaApiData, setSheetsData } = useAdsData();
-
-    // load transparent accounts data on first apge load
-    useEffect(() => {
-        loadAccountsData();
-    }, []);
 
     // load ads data from google sheet
     const {

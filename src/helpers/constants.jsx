@@ -55,3 +55,11 @@ export const links = {
     [elections.e24]: 'https://volby.transparency.sk/euro2024/',
     donateUrl: 'https://transparency.sk/volby',
 };
+
+export const finalReports = true;
+export const offlineMode = true;
+
+export const settings = {
+    finalReports,
+    offlineMode,
+};

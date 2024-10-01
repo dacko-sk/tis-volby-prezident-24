@@ -1,31 +1,38 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { usePapaParse } from 'react-papaparse';
 
+import { offlineMode } from '../helpers/constants';
 import { contains } from '../helpers/helpers';
 
-// import aggregatedAcounts from '../../public/csv/transparent/final_aggr_no_returns.csv';
+import aggregatedAcounts from '../../public/csv/transparent/aggregation_no_returns.csv';
 // import all csv files from the accounts folder via webpack
-// const accountsFolder = require.context(
-//     '../../public/csv/transparent/accounts',
-//     false,
-//     /\.csv$/
-// );
-// const accountFile = (filename) => {
-//     let found = null;
-//     accountsFolder.keys().some((key) => {
-//         if (key.endsWith(filename)) {
-//             found = key;
-//             return true;
-//         }
-//         return false;
-//     });
-//     return found ? accountsFolder(found) : null;
-// };
-const accountFile = (filename) =>
-    `https://raw.githubusercontent.com/matusv/presidential-elections-slovakia-2024/main/accounts/${filename}`;
+const accountsFolder = require.context(
+    '../../public/csv/transparent/accounts',
+    false,
+    /\.csv$/
+);
 
-export const accountsFile =
-    'https://raw.githubusercontent.com/matusv/presidential-elections-slovakia-2024/main/aggregation_no_returns.csv';
+const taUrl =
+    'https://raw.githubusercontent.com/matusv/presidential-elections-slovakia-2024/main/';
+
+const accountFile = (filename) => {
+    if (offlineMode) {
+        let found = null;
+        accountsFolder.keys().some((key) => {
+            if (key.endsWith(filename)) {
+                found = key;
+                return true;
+            }
+            return false;
+        });
+        return found ? accountsFolder(found) : null;
+    }
+    return `${taUrl}accounts/${filename}`;
+};
+
+export const accountsFile = offlineMode
+    ? aggregatedAcounts
+    : `${taUrl}aggregation_no_returns.csv`;
 export const baseDate = 1705266940;
 
 export const aggregatedKeys = {
@@ -136,7 +143,7 @@ export const findByProperty = (accountsData, property, value) => {
 
 export const buildParserConfig = (processCallback, storeDataCallback) => {
     return {
-        worker: true, // must be false for local files
+        worker: !offlineMode, // must be false for local files
         header: true,
         dynamicTyping: true,
         skipEmptyLines: true,
@@ -156,14 +163,15 @@ export const AccountsDataProvider = function ({ children }) {
     const [accountsData, setAccountsData] = useState(initialState);
     const { readRemoteFile } = usePapaParse();
 
-    // selectors
-    const loadAccountsData = () => {
+    // initial accounts data load
+    useEffect(() => {
         readRemoteFile(
             accountsFile,
             buildParserConfig(processAccountsData, setAccountsData)
         );
-    };
+    }, []);
 
+    // selectors
     const allTransparentCandidatesNames = () =>
         accountsData.loaded
             ? accountsData.data.map((row) => row[aggregatedKeys.name] ?? null)
@@ -178,7 +186,6 @@ export const AccountsDataProvider = function ({ children }) {
         () => ({
             accountsData,
             setAccountsData,
-            loadAccountsData,
             allTransparentCandidatesNames,
             candidateAccountData,
         }),
