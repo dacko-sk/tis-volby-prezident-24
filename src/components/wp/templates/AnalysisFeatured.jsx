@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 
-import { candidateData } from '../../../helpers/constants';
+import { candidateData } from '../../../helpers/candidates';
 import { badgePctFormat } from '../../../helpers/helpers';
 import { routes, segments } from '../../../helpers/routes';
 import { transparencyClass } from '../../../helpers/wp';

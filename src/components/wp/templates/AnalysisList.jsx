@@ -3,6 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
+import { candidateData } from '../../../helpers/candidates';
 import { labels, t } from '../../../helpers/dictionary';
 import { badgePctFormat } from '../../../helpers/helpers';
 import { routes, segments } from '../../../helpers/routes';
@@ -13,7 +14,6 @@ import {
 } from '../../../helpers/wp';
 
 import useAdsData from '../../../hooks/AdsData';
-import { candidateData } from '../../../helpers/constants';
 
 function AnalysisList({ article }) {
     const { analysis } = article;

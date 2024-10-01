@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 
-import { candidateData } from '../helpers/constants';
+import { candidateData } from '../helpers/candidates';
 import { labels, t } from '../helpers/dictionary';
 import { decodeSlug, routes, segments } from '../helpers/routes';
 
